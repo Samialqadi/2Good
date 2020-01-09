@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="80b7ac5e-fa30-46f5-b842-28d1acdd486b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/GeofenceBroadcastReceiver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/GeofenceService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/Models/Location.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/Classes/Charity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/Models/Charity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/Quiz1Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/Quiz1Activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/../server/server.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

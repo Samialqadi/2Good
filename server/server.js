@@ -98,7 +98,7 @@ function updateTransactionHistories(firebaseUserID, capCustomerAccount) {
     });
 }
 
-app.get('/v0/charity/getPref', function (req, res) {
+app.get('/v0/geofence/getPlaces', function (req, res) {
   const type = req.query.type || "";
   const location = req.query.location || "";
 
@@ -126,7 +126,8 @@ app.get('/v0/charity/getPref', function (req, res) {
     for (let i = 0; i < results.length; ++i) {
       locations.push({
         lat: results[i]['geometry']['location']['lat'],
-        lng: results[i]['geometry']['location']['lng']
+        lng: results[i]['geometry']['location']['lng'],
+        name: results[i]['name']
       })
     }
     
