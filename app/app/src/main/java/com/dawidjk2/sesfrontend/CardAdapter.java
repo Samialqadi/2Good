@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
 
-    private String[] mDataset;
+    private Card[] mDataset;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -28,10 +28,18 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             endsIn = itemView.findViewById(R.id.cardNumber);
             previousActivity = itemView.findViewById(R.id.previousActivity);
         }
+
+        public void setDetails(Card card) {
+            cardName.setText(card.getCardName());
+            int cardNumLength = card.getCardNumber().length();
+            endsIn.setText("Ending In - " + card.getCardNumber().substring(cardNumLength - 5, cardNumLength - 1));
+            previousActivity.setText("$" + card.getPreviousActivity());
+
+        }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public CardAdapter(String[] myDataset) {
+    public CardAdapter(Card[] myDataset) {
         this.mDataset = myDataset;
     }
 
@@ -41,7 +49,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
                                                      int viewType) {
         // create a new view
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.activity_main_page, parent, false);
+                .inflate(R.layout.card, parent, false);
 
         CardViewHolder viewholder = new CardViewHolder(view);
         return viewholder;
@@ -52,7 +60,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     public void onBindViewHolder(CardViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.textView.setText(mDataset[position]);
+        Card card = mDataset[position];
+        holder.setDetails(card);
+
 
     }
 
@@ -60,9 +70,5 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     @Override
     public int getItemCount() {
         return mDataset.length;
-    }
-
-    public setDetails(Card card) {
-        cardName =
     }
 }
