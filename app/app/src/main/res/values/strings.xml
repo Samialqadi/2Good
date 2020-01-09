@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SES Frontend</string>
     <string name="backend_url">http://127.0.0.1:5000</string>
+    <string name="title_activity_main_page">MainPage</string>
 </resources>
