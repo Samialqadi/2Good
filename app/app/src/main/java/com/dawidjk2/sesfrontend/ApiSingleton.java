@@ -4,23 +4,22 @@ import android.content.Context;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
-public class RequestSingleton {
-    private static RequestSingleton instance;
+public class ApiSingleton {
+    private static ApiSingleton instance;
     private RequestQueue requestQueue;
     private static Context ctx;
     public static String token = "";
 
-    private RequestSingleton(Context context) {
+    private ApiSingleton(Context context) {
         ctx = context;
         requestQueue = getRequestQueue();
     }
 
-    public static synchronized RequestSingleton getInstance(Context context) {
+    public static synchronized ApiSingleton getInstance(Context context) {
         if (instance == null) {
-            instance = new RequestSingleton(context);
+            instance = new ApiSingleton(context);
         }
         return instance;
     }
