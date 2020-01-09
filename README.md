@@ -1,1 +1,1 @@
-# c1-SES-hackathon-entry
+# C1 Hackathon
