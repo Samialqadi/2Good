@@ -33,19 +33,37 @@ app.get('/v0/charity/getCharities', function (req, res) {
 })
 
 app.get('/v0/geofence/getPlaces', function (req, res) {
+  const type = req.query.type || "";
+  const location = req.query.location || "";
+
+  if (type == "" || location == "") {
+    return res.error("Not all parameters provided");
+  }
+
   var options = { method: 'GET',
-  url: 'https://api.data.charitynavigator.org/v2/Organizations',
+  url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json',
   qs: 
-   { app_id: process.env.CHARITY_APP_ID,
-     app_key: process.env.CHARITY_APP_KEY,
-     pageSize: 5,
-     rated: true,
-     sort:"RATING:DESC"
+   { 
+     key: process.env.GOOGLE_MAPS_KEY,
+     radius: 5000,
+     location: location,
+     type: type
    }
   };
   request(options, function (error, response, body) {
-  if (error) throw new Error(error);  
-  res.send(JSON.parse(body))
+    if (error) throw new Error(error); 
+
+    let locations = [];
+    const results = JSON.parse(body)['results'];
+
+    for (let i = 0; i < results.length; ++i) {
+      locations.push({
+        lat: results[i]['geometry']['location']['lat'],
+        lng: results[i]['geometry']['location']['lng']
+      })
+    }
+    
+    return res.send({ locations: locations });
 });
 })
 
