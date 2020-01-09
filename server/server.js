@@ -14,7 +14,7 @@ admin.initializeApp({
 var db = admin.database();
 
 
-// Charity Endpoints
+// Charity Endpoints //
 app.get('/v0/charity/getCharities', function (req, res) {
     var options = { method: 'GET',
     url: 'https://api.data.charitynavigator.org/v2/Organizations',
@@ -31,6 +31,7 @@ app.get('/v0/charity/getCharities', function (req, res) {
     res.send(JSON.parse(body))
   });
 })
+
 
 app.get('/v0/geofence/getPlaces', function (req, res) {
   const type = req.query.type || "";
@@ -65,6 +66,33 @@ app.get('/v0/geofence/getPlaces', function (req, res) {
     
     return res.send({ locations: locations });
 });
+
+app.post('/v0/charity/createDonationAccount', function (req, res) {
+    db.ref('/users/' + req.query.uid).once('value').then(function(snapshot) {
+        if(snapshot.exists()) {
+            res.send(JSON.parse('{"error": "Account already has donation account"}'))
+        } else {
+            var options = { 
+                method: 'POST',
+                url: 'http://api.reimaginebanking.com/customers/5e175612322fa016762f37da/accounts',
+                qs: { key: 'fb6115503f4e5c0d96debdf0fb760ec3' },
+                body: { 
+                    type: 'Savings',
+                    nickname: 'Savings account towards charities',
+                    rewards: 0,
+                    balance: 0 
+                },
+                json: true 
+            };
+            request(options, function (error, response, body) {
+            if (error) throw new Error(error);
+            admin.database().ref('/users/' + req.query.uid).update({
+                doesHaveDonationAccount: true
+            })
+            res.send(body)
+            });
+        }
+    })
 })
 
 app.listen(port, () => console.log(`Trash State School Coder server running on: ${port}!`))
