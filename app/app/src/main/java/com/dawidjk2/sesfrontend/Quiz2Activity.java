@@ -1,5 +1,4 @@
 package com.dawidjk2.sesfrontend;
 
-public class AuthSingleton {
-
+public class Quiz2Activity {
 }

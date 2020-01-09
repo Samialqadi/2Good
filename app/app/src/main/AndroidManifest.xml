@@ -4,6 +4,8 @@
     package="com.dawidjk2.sesfrontend">
 
     <dist:module dist:instant="true" />
+    
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -12,15 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".ExpandedCardPage"
-            android:label="@string/title_activity_expanded_card_page"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
-            android:name=".MainPage"
-            android:label="@string/title_activity_main_page"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Quiz1Activity" />
+        <activity android:name=".Quiz1Activity"
+            android:screenOrientation="sensorPortrait"
+            android:label="does this work">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
