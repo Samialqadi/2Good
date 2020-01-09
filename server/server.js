@@ -32,6 +32,23 @@ app.get('/v0/charity/getCharities', function (req, res) {
   });
 })
 
+app.get('/v0/geofence/getPlaces', function (req, res) {
+  var options = { method: 'GET',
+  url: 'https://api.data.charitynavigator.org/v2/Organizations',
+  qs: 
+   { app_id: process.env.CHARITY_APP_ID,
+     app_key: process.env.CHARITY_APP_KEY,
+     pageSize: 5,
+     rated: true,
+     sort:"RATING:DESC"
+   }
+  };
+  request(options, function (error, response, body) {
+  if (error) throw new Error(error);  
+  res.send(JSON.parse(body))
+});
+})
+
 app.listen(port, () => console.log(`Trash State School Coder server running on: ${port}!`))
 
 // db.ref('/').once('value').then(function(snapshot) {
