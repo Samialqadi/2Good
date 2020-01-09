@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Quiz2Activity extends AppCompatActivity {
@@ -37,6 +38,7 @@ public class Quiz2Activity extends AppCompatActivity {
         habits = (List<String>) getIntent().getSerializableExtra("habitList");
 
         addListenerOnButton();
+        getCharities();
     }
 
     private Button btnSubmit;
@@ -70,7 +72,6 @@ public class Quiz2Activity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONArray array) {
-                        ArrayList<String> stringArrayList = new ArrayList<>();
                         try {
                             for(int i = 0; i < array.length(); ++i) {
                                 JSONObject object = array.getJSONObject(i);
@@ -84,10 +85,15 @@ public class Quiz2Activity extends AppCompatActivity {
                                 JSONObject rating = object.getJSONObject("currentRating");//rating
                                 charity.rating = rating.getInt("rating");//rating
                                 charityList.add(charity);
-                                stringArrayList.add(rating.getInt("rating") + "\n");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
+                        }
+
+                        //sort by rating
+                        Collections.sort(charityList);
+                        for (Charity charity : charityList) {
+                            Log.d("Charity rating", String.valueOf(charity.rating));
                         }
 
                     }
