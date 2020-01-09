@@ -2,6 +2,7 @@ package com.dawidjk2.sesfrontend;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -32,16 +33,17 @@ public class Quiz1Activity extends AppCompatActivity {
             public void onClick(View v) {
                 ArrayList<String> habitsChecked = new ArrayList<>();
 
-                LinearLayout habitList = (LinearLayout) findViewById(R.id.habitList);
+                LinearLayout habitList = findViewById(R.id.habitList);
                 int count = habitList.getChildCount();
                 for (int i = 0; i < count; i++) {
                     CheckBox habit = (CheckBox) habitList.getChildAt(i);
                     if (habit.isChecked()) habitsChecked.add((String) habit.getText());
                 }
 
-                for (int i = 0; i < habitsChecked.size(); i++) {
-                    System.out.println(habitsChecked.get(i));
-                }
+                // Send data to the next Quiz and start the activity
+                Intent intent = new Intent(Quiz1Activity.this, Quiz2Activity.class);
+                intent.putExtra("habitList", habitsChecked);
+                startActivity(intent);
             }
         });
 

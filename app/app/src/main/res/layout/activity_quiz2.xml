@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Quiz1Activity">
+    tools:context=".Quiz2Activity">
 
     <TextView
         android:id="@+id/instructions"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Your help will make great change."
-        app:layout_constraintBottom_toTopOf="@id/habitList"
+        app:layout_constraintBottom_toTopOf="@id/charityList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructions" />
@@ -36,14 +36,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Button"
+        android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/habitList" />
+        app:layout_constraintTop_toBottomOf="@id/charityList" />
 
     <LinearLayout
-        android:id="@+id/habitList"
+        android:id="@+id/charityList"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
