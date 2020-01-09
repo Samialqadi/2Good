@@ -1,19 +1,18 @@
 require('dotenv').config()
 const express = require('express')
+const bodyParser = require('body-parser');
 const app = express()
+app.use(bodyParser());
 const port = process.env.PORT
 const request = require('request');
 var admin = require("firebase-admin");
 var serviceAccount = require('./service-account.json');
-
+var cron = require('node-cron');
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://capital-one-19531.firebaseio.com"
 });
-
 var db = admin.database();
-
-
 // Charity Endpoints //
 app.get('/v0/charity/getCharities', function (req, res) {
     var options = { method: 'GET',
@@ -31,42 +30,22 @@ app.get('/v0/charity/getCharities', function (req, res) {
     res.send(JSON.parse(body))
   });
 })
-
-
-app.get('/v0/geofence/getPlaces', function (req, res) {
-  const type = req.query.type || "";
-  const location = req.query.location || "";
-
-  if (type == "" || location == "") {
-    return res.error("Not all parameters provided");
-  }
-
-  var options = { method: 'GET',
-  url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json',
-  qs: 
-   { 
-     key: process.env.GOOGLE_MAPS_KEY,
-     radius: 5000,
-     location: location,
-     type: type
-   }
-  };
-  request(options, function (error, response, body) {
-    if (error) throw new Error(error); 
-
-    let locations = [];
-    const results = JSON.parse(body)['results'];
-
-    for (let i = 0; i < results.length; ++i) {
-      locations.push({
-        lat: results[i]['geometry']['location']['lat'],
-        lng: results[i]['geometry']['location']['lng']
-      })
-    }
-    
-    return res.send({ locations: locations });
-});
-
+app.post('/v0/charity/updatePref', function (req, res) {
+    var charities = req.body.charity_id
+    var blacklisted = req.body.blacklisted
+    var firebaseUserID = req.body._id
+    admin.database().ref('/users/' + firebaseUserID + '/pref/').update({
+        blacklisted: blacklisted,
+        charities: charities
+    })
+    res.status(200).send({ status: "success!" });
+})
+app.get('/v0/charity/getPref', function(req, res) {
+    var firebaseUserID = req.body._id
+    db.ref("/users/" + firebaseUserID + "/pref").on("value", function(snapshot) {
+        res.status(200).send(snapshot.val())
+    })
+})
 app.post('/v0/charity/createDonationAccount', function (req, res) {
     db.ref('/users/' + req.query.uid).once('value').then(function(snapshot) {
         if(snapshot.exists()) {
@@ -74,8 +53,8 @@ app.post('/v0/charity/createDonationAccount', function (req, res) {
         } else {
             var options = { 
                 method: 'POST',
-                url: 'http://api.reimaginebanking.com/customers/5e175612322fa016762f37da/accounts',
-                qs: { key: 'fb6115503f4e5c0d96debdf0fb760ec3' },
+                url: 'http://api.reimaginebanking.com/customers/'+process.env.CAP_CUST_ID+'/accounts',
+                qs: { key: process.env.CAP_ONE },
                 body: { 
                     type: 'Savings',
                     nickname: 'Savings account towards charities',
@@ -94,9 +73,66 @@ app.post('/v0/charity/createDonationAccount', function (req, res) {
         }
     })
 })
+app.get('/v0/charity/updateTransactions', function (req, res) {
+    res.send(updateTransactionHistories("T6mNyK7SA0Ss3IAAhvQD5It0m8Y2", process.env.CAP_CUST_ACC))
+})
+// cron.schedule('* * * * *', () => {
+//     updateTransactionHistories("T6mNyK7SA0Ss3IAAhvQD5It0m8Y2", process.env.CAP_CUST_ACC)
+// });
+function updateTransactionHistories(firebaseUserID, capCustomerAccount) {
+    var options = { method: 'GET',
+    url: 'http://api.reimaginebanking.com/accounts/5e175613322fa016762f37dc/purchases',
+    qs: { key: 'fb6115503f4e5c0d96debdf0fb760ec3' }};
+    request(options, function (error, response, body) {
+    if (error) throw new Error(error);
+    var resp = JSON.parse(body)
+    admin.database().ref('/users/' + firebaseUserID + '/transactions/').on("value", function(snapshot) {
+        var newSnap = snapshot.val();
+        console.log(newSnap)
+        for(var i = 0; i < resp.length; i++) {
+            if(!(resp[i]._id in newSnap)) {
+                // newSnap.push()
+            }
+        }
+    })
+    });
+}
+
+app.get('/v0/charity/getPref', function (req, res) {
+  const type = req.query.type || "";
+  const location = req.query.location || "";
+
+  if (type == "" || location == "") {
+    return res.error("Not all parameters provided");
+  }
+
+  var options = {
+    method: 'GET',
+    url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json',
+    qs:
+    {
+      key: process.env.GOOGLE_MAPS_KEY,
+      radius: 5000,
+      location: location,
+      type: type
+    }
+  };
+  request(options, function (error, response, body) {
+    if (error) throw new Error(error);
+
+    let locations = [];
+    const results = JSON.parse(body)['results'];
+
+    for (let i = 0; i < results.length; ++i) {
+      locations.push({
+        lat: results[i]['geometry']['location']['lat'],
+        lng: results[i]['geometry']['location']['lng']
+      })
+    }
+    
+    return res.send({ locations: locations });
+  });
+});
 
 app.listen(port, () => console.log(`Trash State School Coder server running on: ${port}!`))
 
-// db.ref('/').once('value').then(function(snapshot) {
-//     console.log(snapshot.val())
-// })

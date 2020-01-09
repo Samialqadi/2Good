@@ -1,4 +1,4 @@
-package com.dawidjk2.sesfrontend.Classes;
+package com.dawidjk2.sesfrontend.Models;
 
 public class Charity {
     public String charityName = "";

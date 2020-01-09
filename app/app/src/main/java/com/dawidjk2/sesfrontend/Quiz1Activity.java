@@ -10,8 +10,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.dawidjk2.sesfrontend.Classes.Charity;
+import com.dawidjk2.sesfrontend.Models.Charity;
+import com.google.android.gms.location.GeofencingClient;
+import com.google.android.gms.location.LocationServices;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 public class Quiz1Activity extends AppCompatActivity {
     public ArrayList<Charity> charityList = new ArrayList<>();
     TextView textView;
+    private GeofencingClient geofencingClient;
 
     public String url = "https://api.data.charitynavigator.org/v2/Organizations?app_id=a8597fc8&app_key=e2f022d55899528abddc3181808a6c94&rated=true";
 
@@ -34,6 +36,7 @@ public class Quiz1Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz1);
+        geofencingClient = LocationServices.getGeofencingClient(this);
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -59,8 +62,7 @@ public class Quiz1Activity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-                        textView.setText(stringArrayList.toString());
+                        
                     }
                 }, new Response.ErrorListener() {
 
