@@ -61,7 +61,6 @@ public class Quiz1Activity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        textView.setText(stringArrayList.toString());
                     }
                 }, new Response.ErrorListener() {
 

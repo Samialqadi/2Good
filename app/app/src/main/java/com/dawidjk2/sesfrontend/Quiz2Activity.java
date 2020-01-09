@@ -14,13 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Quiz2Activity extends AppCompatActivity {
+    List<String> habits;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz2);
 
-        List<String> habits = (List<String>) getIntent().getSerializableExtra("habitList");
+        habits = (List<String>) getIntent().getSerializableExtra("habitList");
 
         addListenerOnButton();
     }
@@ -43,9 +44,8 @@ public class Quiz2Activity extends AppCompatActivity {
                     if (charity.isChecked()) charityList.add((String) charity.getText());
                 }
 
-//                Intent intent = new Intent(Quiz1Activity.this, Quiz2Activity.class);
-//                intent.putExtra("habitList", habitsChecked);
-//                startActivity(intent);
+                Intent intent = new Intent(Quiz2Activity.this, MainPageActivity.class);
+                startActivity(intent);
             }
         });
 
