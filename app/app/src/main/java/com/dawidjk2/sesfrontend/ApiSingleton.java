@@ -1,29 +1,26 @@
 package com.dawidjk2.sesfrontend;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.util.LruCache;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
-public class AuthSingleton {
-    private static AuthSingleton instance;
+public class RequestSingleton {
+    private static RequestSingleton instance;
     private RequestQueue requestQueue;
-    private ImageLoader imageLoader;
     private static Context ctx;
     public static String token = "";
 
-    private AuthSingleton(Context context) {
+    private RequestSingleton(Context context) {
         ctx = context;
         requestQueue = getRequestQueue();
     }
 
-    public static synchronized AuthSingleton getInstance(Context context) {
+    public static synchronized RequestSingleton getInstance(Context context) {
         if (instance == null) {
-            instance = new AuthSingleton(context);
+            instance = new RequestSingleton(context);
         }
         return instance;
     }
