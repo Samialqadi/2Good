@@ -8,25 +8,33 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
 
-    private Card[] mDataset;
+    private ArrayList<Card> mDataset;
+    private OnItemListener mOnItemListener;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
-    public static class CardViewHolder extends RecyclerView.ViewHolder {
+    public static class CardViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         // each data item is just a string in this case
         public TextView cardName;
         public TextView endsIn;
         public TextView previousActivity;
 
-        public CardViewHolder(View itemView) {
+        public OnItemListener onItemListener;
+
+        public CardViewHolder(View itemView, OnItemListener onItemListener) {
             super(itemView);
             cardName = itemView.findViewById(R.id.cardName);
             endsIn = itemView.findViewById(R.id.cardNumber);
             previousActivity = itemView.findViewById(R.id.previousActivity);
+            this.onItemListener = onItemListener;
+
+            itemView.setOnClickListener(this);
         }
 
         public void setDetails(Card card) {
@@ -36,11 +44,17 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
             previousActivity.setText("$" + card.getPreviousActivity());
 
         }
+
+        @Override
+        public void onClick(View v) {
+            onItemListener.onItemClick(getAdapterPosition());
+        }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public CardAdapter(Card[] myDataset) {
+    public CardAdapter(ArrayList<Card> myDataset, OnItemListener onItemListener) {
         this.mDataset = myDataset;
+        this.mOnItemListener = onItemListener;
     }
 
     // Create new views (invoked by the layout manager)
@@ -51,7 +65,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card, parent, false);
 
-        CardViewHolder viewholder = new CardViewHolder(view);
+        CardViewHolder viewholder = new CardViewHolder(view, mOnItemListener);
         return viewholder;
     }
 
@@ -60,7 +74,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     public void onBindViewHolder(CardViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        Card card = mDataset[position];
+        Card card = mDataset.get(position);
         holder.setDetails(card);
 
 
@@ -69,6 +83,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return mDataset.size();
+    }
+
+    public interface OnItemListener {
+        void onItemClick(int position);
     }
 }

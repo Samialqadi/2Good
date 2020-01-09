@@ -26,6 +26,7 @@
             android:screenOrientation="sensorPortrait"
             android:label="does this work"/>
         <activity android:name=".MainPageActivity"/>
+        <activity android:name=".ExpandedCardActivity"/>
     </application>
 
 </manifest>
