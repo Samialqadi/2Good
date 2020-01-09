@@ -1,1 +1,1 @@
-C1 Hackacthon Backend
+C1 Hackacthon
