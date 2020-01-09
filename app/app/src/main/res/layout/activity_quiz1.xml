@@ -100,5 +100,5 @@
             android:paddingLeft="8dp"
             android:text="Clothes" />
     </LinearLayout>
-
+  
 </androidx.constraintlayout.widget.ConstraintLayout>
