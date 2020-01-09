@@ -107,11 +107,7 @@ function updateTransactionHistories(firebaseUserID, capCustomerAccount) {
         console.log(newSnap)
         newSnap = snapshot.val();
         for(var i = 0; i < resp.length; i++) {
-            if(snapshot.val() == undefined) {
-                db.ref('/users/' + firebaseUserID + '/transactions/').push(new History(resp[i]._id, resp[i].amount))
-            } else if(!(resp[i]._id in newSnap)) {
-                db.ref('/users/' + firebaseUserID + '/transactions/').push(new History(resp[i]._id, resp[i].amount))
-            }
+
         }
     })
     });
@@ -126,36 +122,60 @@ function History(_id, amount) {
 
 //// GEOFENCING STUFF
 app.get('/v0/geofence/getPlaces', function (req, res) {
-    const type = req.query.type || "";
-    const location = req.query.location || "";
-  
-    if (type == "" || location == "") {
-      return res.error("Not all parameters provided");
-    }
-  
-    var options = { method: 'GET',
+  const type = req.query.type || "";
+  const location = req.query.location || "";
+  if (type == "" || location == "") {
+    return res.error("Not all parameters provided");
+  }
+  var options = {
+    method: 'GET',
     url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json',
-    qs: 
-     { 
-       key: process.env.GOOGLE_MAPS_KEY,
-       radius: 5000,
-       location: location,
-       type: type
-     }
-    };
-    request(options, function (error, response, body) {
-      if (error) throw new Error(error); 
-  
-      let locations = [];
-      const results = JSON.parse(body)['results'];
-  
-      for (let i = 0; i < results.length; ++i) {
-        locations.push({
-          lat: results[i]['geometry']['location']['lat'],
-          lng: results[i]['geometry']['location']['lng']
-        })
-      }
-      
-      return res.send({ locations: locations });
+    qs:
+    {
+      key: process.env.GOOGLE_MAPS_KEY,
+      radius: 5000,
+      location: location,
+      type: type
+    }
+  };
+  request(options, function (error, response, body) {
+    if (error) throw new Error(error);
+    let locations = [];
+    const results = JSON.parse(body)['results'];
+    for (let i = 0; i < results.length; ++i) {
+      locations.push({
+        lat: results[i]['geometry']['location']['lat'],
+        lng: results[i]['geometry']['location']['lng'],
+        name: results[i]['place_id']
+      })
+    }
+    return res.send({ locations: locations });
   });
+});
+
+app.post('/v0/geofence/createGeofence', function(req, res){
+    const reqArray = req.body
+    var i
+    for(i in reqArray) {
+        const latitude = reqArray[i].latitude || ""
+        const longtitude = reqArray[i].longtitude || ""
+        const radius = reqArray[i].radius || ""
+        const expTime = reqArray[i].exp || ""
+        const key = reqArray[i].key || ""
+        console.log(key)
+        if(expTime == "" || radius == "" || longtitude == "" || latitude == "" || key == "") {
+            res.status(503).send('{"error": "OOPSIE WOOPSIE MADE A WHITTLE FUCKIE WUCKIE"}')
+            break;
+        }
+
+        db.ref("/users/" + process.env.FIREBASE_TEST_ACC + "/geofence/" + key).set({
+            latitude: latitude,
+            longtitude: longtitude,
+            radius: radius,
+            expTime: expTime,
+            key: key
+        })
+        res.status(200).send("")
+    }
+});
 app.listen(port, () => console.log(`Trash State School Coder server running on: ${port}!`))
