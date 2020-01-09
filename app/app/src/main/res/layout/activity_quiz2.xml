@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:gravity="center"
-        android:text="Select the habits you want to stay away from!"
+        android:text="Choose the charities you want to donate spare change to!"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@id/help"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="We're here to help."
+        android:text="Your help will make great change."
         app:layout_constraintBottom_toTopOf="@id/habitList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Submit"
+        android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,49 +56,49 @@
         app:layout_constraintTop_toBottomOf="@+id/help">
 
         <CheckBox
-            android:id="@+id/habit1"
+            android:id="@+id/charity1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:paddingLeft="8dp"
-            android:text="Alcohol" />
+            android:text="item1" />
 
         <CheckBox
-            android:id="@+id/habit2"
+            android:id="@+id/charity2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:paddingLeft="8dp"
-            android:text="Coffee Shops" />
+            android:text="item2" />
 
         <CheckBox
-            android:id="@+id/habit3"
+            android:id="@+id/charity3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:paddingLeft="8dp"
-            android:text="Gambling" />
+            android:text="item3" />
 
         <CheckBox
-            android:id="@+id/habit4"
+            android:id="@+id/charity4"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:paddingLeft="8dp"
-            android:text="Restaurants" />
+            android:text="item4" />
 
         <CheckBox
-            android:id="@+id/habit5"
+            android:id="@+id/charity5"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:paddingLeft="8dp"
-            android:text="Clothes" />
+            android:text="item5" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
