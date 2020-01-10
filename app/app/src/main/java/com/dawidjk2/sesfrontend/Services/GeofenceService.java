@@ -12,7 +12,7 @@ public class GeofenceService {
     private int radius = 100;
 
 
-    GeofenceService(GeofencingClient geofencingClient) {
+    public GeofenceService(GeofencingClient geofencingClient) {
         this.geofencingClient = geofencingClient;
         geofenceList = new ArrayList<>();
     }
