@@ -70,6 +70,19 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
 
         createNotificationChannel();
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            // Logic to handle location object
+                            lastKnownLocation = location.getLatitude() + "," + location.getLongitude();
+                        }
+                    }
+                });
+
         geofencingClient = LocationServices.getGeofencingClient(this);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         geofenceService = new GeofenceService(geofencingClient);
