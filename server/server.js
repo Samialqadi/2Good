@@ -103,7 +103,7 @@ app.get('/v0/geofence/getPlaces', function (req, res) {
   const location = req.headers.location || "";
 
   if (type == "" || location == "") {
-    return res.send("Not all parameters provided");
+    return es.status(503).send("Not all parameters provided");
   }
 
   var options = {
@@ -134,6 +134,45 @@ app.get('/v0/geofence/getPlaces', function (req, res) {
     return res.send({ locations: locations });
   });
 });
+
+app.post('/v0/geofence/createGeofence', function(req, res){
+  const reqArray = req.body
+  var i
+  for(i in reqArray) {
+      const latitude = reqArray[i].latitude || ""
+      const longtitude = reqArray[i].longtitude || ""
+      const radius = reqArray[i].radius || ""
+      const expTime = reqArray[i].exp || ""
+      const key = reqArray[i].key || ""
+      console.log(reqArray[i])
+      if(expTime == "" || radius == "" || longtitude == "" || latitude == "" || key == "") {
+          // res.status(503).send('{"error": "OOPSIE WOOPSIE MADE A WHITTLE FUCKIE WUCKIE"}')
+          continue;
+      }
+
+      db.ref("/users/" + process.env.FIREBASE_TEST_ACC + "/geofence/" + key).set({
+          latitude: latitude,
+          longtitude: longtitude,
+          radius: radius,
+          expTime: expTime,
+          key: key
+      })
+  }
+  res.status(200).send("")
+});
+
+app.post('/v0/geofence/setCardStatus', function(req, res) {
+  var firebaseUserID = process.env.FIREBASE_TEST_ACC
+  const status = req.body.status || ""
+  console.log("Status:");
+  console.log(status)
+  if(status == "") {
+      res.status(503).send('{"error": "missing the thing brother"}')
+      return
+  }
+  db.ref('/users/' + firebaseUserID + "/isCardDisabled").set(status)
+  res.status(200).send("")
+})
 
 app.listen(port, () => console.log(`Trash State School Coder server running on: ${port}!`))
 

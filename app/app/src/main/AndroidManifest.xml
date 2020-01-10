@@ -15,20 +15,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-
         <receiver android:name=".Services.GeofenceBroadcastReceiver"/>
-
-        <activity android:name=".MainPageActivity"
+        <activity android:name=".loginScreen" />
+        <activity android:name=".SplashActivity">
             android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Quiz2Activity"
-            android:screenOrientation="sensorPortrait"
-            android:label="does this work"/>
-        <activity android:name=".UpdatePreferenceActivity"/>
+        <activity
+            android:name=".Quiz1Activity"
+            android:label="does this work"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".Quiz2Activity"
+            android:label="does this work"
+            android:screenOrientation="sensorPortrait" />
+        <activity android:name=".MainPageActivity" />
         <activity android:name=".ExpandedCardActivity"/>
     </application>
 
