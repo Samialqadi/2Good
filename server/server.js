@@ -8,6 +8,7 @@ const request = require('request');
 var admin = require("firebase-admin");
 var serviceAccount = require('./service-account.json');
 var cron = require('node-cron');
+var async = require("async");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -84,31 +85,49 @@ app.post('/v0/charity/createDonationAccount', function (req, res) {
 app.get('/v0/charity/getAccounts', function(req, res) {
     var options = { method: 'GET',
     url: 'http://api.reimaginebanking.com/accounts',
-    qs: { key: 'fb6115503f4e5c0d96debdf0fb760ec3' },
-    headers: 
-    { 'Postman-Token': '7588cdb0-d6f6-47bf-b815-a097f441173a',
-        'cache-control': 'no-cache',
-        Accept: 'application/json' } };
+    qs: { key: 'fb6115503f4e5c0d96debdf0fb760ec3' }};
 
     request(options, function (error, response, body) {
     if (error) throw new Error(error);
     res.status(200).send(JSON.parse(body))
     });
-
 })
 
 function updateTransactionHistories(firebaseUserID, capCustomerAccount) {
     var options = { method: 'GET',
-    url: 'http://api.reimaginebanking.com/accounts/5e175613322fa016762f37dc/purchases',
+    url: 'http://api.reimaginebanking.com/accounts',
     qs: { key: 'fb6115503f4e5c0d96debdf0fb760ec3' }};
 
+    var total = 0
+
     request(options, function (error, response, body) {
-    if (error) throw new Error(error);
-    var resp = JSON.parse(body)
-    for(var i = 0; i < resp.length; i++) {
-        resp[i].charity = 1 - (resp[i].amount % 1)
-    }
-    console.log(resp)
+        if (error) throw new Error(error);
+        var accountsJson = JSON.parse(body)
+        async.forEachOf(accountsJson, (value, i, callback) => {
+            var options = { method: 'GET',
+            url: 'http://api.reimaginebanking.com/accounts/'+accountsJson[i]._id+'/purchases',
+            qs: { key: 'fb6115503f4e5c0d96debdf0fb760ec3' }};
+            var accountID = accountsJson[i]._id
+            request(options, function (purchaseError, purchaseResponse, purchaseBody) {
+                if (purchaseError) throw new Error(purchaseError);
+                var parsedPurchaseBody = JSON.parse(purchaseBody);
+                for(var j in parsedPurchaseBody) {
+                    var firebaseUserID = process.env.FIREBASE_TEST_ACC
+                    var charityValue = 1 - (parsedPurchaseBody[j].amount % 1)
+                    db.ref('/users/' + firebaseUserID + '/transactions/'+accountID+ "/"+parsedPurchaseBody[j]._id).set({
+                        _id:parsedPurchaseBody[j]._id,
+                        amount:parsedPurchaseBody[j].amount,
+                        charity: charityValue,
+                        account: accountID
+                    })
+                    total += Math.ceil(charityValue * 100) / 100;
+                }
+                callback();
+            })
+        }, err => {
+            console.log(total)
+            db.ref('/users/' + firebaseUserID + '/transactions/totalCharity').set(total)
+        });
     })
 }
 
@@ -118,7 +137,10 @@ function updateTransactionHistories(firebaseUserID, capCustomerAccount) {
 
 app.get('/v0/charity/getTransactions', function (req, res) {
     var accountNumber = req.query.accountNumber
-
+    var firebaseUserID = process.env.FIREBASE_TEST_ACC
+    db.ref('/users/' + firebaseUserID + '/transactions/'+accountNumber).on("value", function(snapshot) {
+        res.status(200).send(snapshot.val())
+    })
 })
 
 app.get('/v0/charity/updateTransactions', function (req, res) {
