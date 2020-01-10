@@ -102,6 +102,8 @@ app.get('/v0/geofence/getPlaces', function (req, res) {
   const type = req.headers.type || "";
   const location = req.headers.location || "";
 
+  console.log(location);
+
   if (type == "" || location == "") {
     return res.send("Not all parameters provided");
   }
@@ -124,12 +126,15 @@ app.get('/v0/geofence/getPlaces', function (req, res) {
     const results = JSON.parse(body)['results'];
 
     for (let i = 0; i < results.length; ++i) {
+      console.log(results[i]);
       locations.push({
         lat: results[i]['geometry']['location']['lat'],
         lng: results[i]['geometry']['location']['lng'],
         key: results[i]['place_id']
       })
     }
+
+    console.log(locations);
     
     return res.send({ locations: locations });
   });

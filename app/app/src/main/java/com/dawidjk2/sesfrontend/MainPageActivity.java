@@ -1,11 +1,14 @@
 package com.dawidjk2.sesfrontend;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -29,6 +32,7 @@ import com.dawidjk2.sesfrontend.Models.Transaction;
 import com.dawidjk2.sesfrontend.Services.GeofenceBroadcastReceiver;
 import com.dawidjk2.sesfrontend.Services.GeofenceService;
 import com.dawidjk2.sesfrontend.Singletons.ApiSingleton;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -56,11 +60,15 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
     private PendingIntent geofencePendingIntent;
     private GeofenceService geofenceService;
     private LocationManager locationManager;
+    private FusedLocationProviderClient fusedLocationClient;
+    public static String lastKnownLocation = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_drawer_layout);
+
+        createNotificationChannel();
 
         geofencingClient = LocationServices.getGeofencingClient(this);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -98,7 +106,7 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         /* TODO: Handle error */
-                        Log.e("Volley", error.toString());
+                        Log.e("Volley Places", error.toString());
                     }
                 }) {
             @Override
@@ -106,7 +114,12 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
                 Map<String, String>  params = new HashMap<>();
                 @SuppressLint("MissingPermission")
                 Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                params.put("location", location.getLatitude() + "," + location.getLongitude());
+
+                if (location != null) {
+                    lastKnownLocation = location.getLatitude() + "," + location.getLongitude();
+                }
+                Log.d("Local", lastKnownLocation);
+                params.put("location", lastKnownLocation);
                 params.put("type", "cafe");
 
                 return params;
@@ -203,5 +216,21 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
                         // ...
                     }
                 });
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.app_name);
+            String description = getString(R.string.app_name);
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel(getString(R.string.app_name), name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 }
