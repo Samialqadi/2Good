@@ -100,6 +100,17 @@ function updateTransactionHistories(firebaseUserID, capCustomerAccount) {
 
     var total = 0
 
+    var options = { method: 'GET',
+    url: 'http://api.reimaginebanking.com/accounts',
+    qs: { key: 'fb6115503f4e5c0d96debdf0fb760ec3' }};
+
+    request(options, function (error, response, body) {
+        if (error) throw new Error(error);
+        for(var i = 0; i < JSON.parse(body).length; i++) {
+            total += JSON.parse(body)[i].rewards / 100
+        }
+    });
+
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
         var accountsJson = JSON.parse(body)
@@ -118,14 +129,14 @@ function updateTransactionHistories(firebaseUserID, capCustomerAccount) {
                         _id:parsedPurchaseBody[j]._id,
                         amount:parsedPurchaseBody[j].amount,
                         charity: charityValue,
-                        account: accountID
+                        account: accountID,
+                        merchant_id: parsedPurchaseBody[j].merchant_id
                     })
                     total += Math.ceil(charityValue * 100) / 100;
                 }
                 callback();
             })
         }, err => {
-            console.log(total)
             db.ref('/users/' + firebaseUserID + '/transactions/totalCharity').set(total)
         });
     })
@@ -143,10 +154,29 @@ app.get('/v0/charity/getTransactions', function (req, res) {
     })
 })
 
+app.get('/v0/charity/totalCharity', function(req, res) {
+    var firebaseUserID = process.env.FIREBASE_TEST_ACC
+    db.ref('/users/' + firebaseUserID + '/transactions/totalCharity').on("value", function(snapshot) {
+        res.status(200).send()
+    })
+})
+
 app.get('/v0/charity/updateTransactions', function (req, res) {
     res.send(updateTransactionHistories(process.env.FIREBASE_TEST_ACC, process.env.CAP_CUST_ACC))
 })
 
+app.get('/v0/charity/getMerchants', function (req, res) {
+    var merchantID = req.query.merchantID
+    
+    var options = { method: 'GET',
+    url: 'http://api.reimaginebanking.com/merchants/'+merchantID,
+    qs: { key: 'fb6115503f4e5c0d96debdf0fb760ec3' }};
+
+    request(options, function (error, response, body) {
+        res.send(JSON.parse(body))
+    });
+
+})
 //// GEOFENCING STUFF
 app.get('/v0/geofence/getPlaces', function (req, res) {
   const type = req.query.type || "";
