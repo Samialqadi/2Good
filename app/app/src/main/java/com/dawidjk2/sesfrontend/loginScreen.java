@@ -24,7 +24,7 @@ public class loginScreen extends AppCompatActivity {
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
-        submit = findViewById(R.id.phoneButton);
+        submit = findViewById(R.id.login);
         addOnClickListenerToSubmit();
         email.addTextChangedListener(textWatcher);
         password.addTextChangedListener(textWatcher);
