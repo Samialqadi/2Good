@@ -35,6 +35,7 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
 
         hello = findViewById(R.id.mainPageHello);
         balance = findViewById(R.id.mainPageBalance);
+        findViewById(R.id.nav_bar_button).setOnClickListener(this);
 
         hello.setText("Welcome back, " + name + "!");
         balance.setText("$" + accountBalance);
@@ -75,8 +76,6 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
         intent.putExtra("card", card);
         intent.putExtra("transactions", transactions);
         startActivity(intent);
-
-        findViewById(R.id.nav_bar_button).setOnClickListener(this);
     }
 
     public void onClick(View v) {
