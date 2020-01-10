@@ -24,6 +24,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.dawidjk2.sesfrontend.Adapters.CardAdapter;
 import com.dawidjk2.sesfrontend.Models.Card;
 import com.dawidjk2.sesfrontend.Models.Geofence;
@@ -70,14 +71,12 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, getString(R.string.backend_url) + "v0/geofence/getPlaces", null, new Response.Listener<JSONObject>() {
-
                     @Override
                     public void onResponse(JSONObject object) {
                         try {
                             JSONArray locationArray = object.getJSONArray("locations");
                             ArrayList<Geofence> geofenceArrayList = new ArrayList<>();
                             Log.d("locationArray length", String.valueOf(locationArray.length()));
-
                             for(int i = 0; i < locationArray.length(); ++i) {
                                 JSONObject location = locationArray.getJSONObject(i);
                                 Geofence geofence = new Geofence();
@@ -85,10 +84,8 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
                                 geofence.longitude = location.getDouble("lng");
                                 geofence.key = location.getString("key");
                                 geofence.exp = 999999999999999999L;
-
                                 geofenceArrayList.add(geofence);
                             }
-
                             geofenceService.addFences(geofenceArrayList,getString(R.string.backend_url), getApplicationContext());
                             intializeGeofence();
                         } catch (JSONException e) {
@@ -96,7 +93,6 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
                         }
                     }
                 }, new Response.ErrorListener() {
-
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         /* TODO: Handle error */
@@ -108,14 +104,12 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
                 Map<String, String>  params = new HashMap<>();
                 @SuppressLint("MissingPermission")
                 Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
                 if (location != null) {
                     lastKnownLocation = location.getLatitude() + "," + location.getLongitude();
                 }
                 Log.d("Local", lastKnownLocation);
                 params.put("location", lastKnownLocation);
                 params.put("type", "cafe");
-
                 return params;
             }
         };
@@ -218,7 +212,6 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
             navDrawer.closeDrawer(GravityCompat.END);
         }
     }
-}
 
     private PendingIntent getGeofencePendingIntent() {
         // Reuse the PendingIntent if we already have it.
