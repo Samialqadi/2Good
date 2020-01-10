@@ -127,7 +127,7 @@ app.get('/v0/geofence/getPlaces', function (req, res) {
       locations.push({
         lat: results[i]['geometry']['location']['lat'],
         lng: results[i]['geometry']['location']['lng'],
-        name: results[i]['name']
+        key: results[i]['place_id']
       })
     }
     
