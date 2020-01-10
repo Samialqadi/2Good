@@ -1,7 +1,5 @@
 package com.dawidjk2.sesfrontend;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,9 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class loginScreen extends AppCompatActivity {
 
-    private EditText phoneNumber;
+    private EditText email;
+    private EditText password;
 
     private Button submit;
 
@@ -21,10 +22,12 @@ public class loginScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
 
-        phoneNumber = findViewById(R.id.usersPhoneNumber);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
         submit = findViewById(R.id.phoneButton);
         addOnClickListenerToSubmit();
-        phoneNumber.addTextChangedListener(textWatcher);
+        email.addTextChangedListener(textWatcher);
+        password.addTextChangedListener(textWatcher);
     }
 
     private TextWatcher textWatcher = new TextWatcher() {
@@ -36,8 +39,9 @@ public class loginScreen extends AppCompatActivity {
 
         @Override
         public void afterTextChanged(Editable s) {
-            String numberAsString = phoneNumber.getText().toString();
-            submit.setEnabled(numberAsString.length() == 10);
+            String numberAsString = email.getText().toString();
+            String passwordAsString = password.getText().toString();
+            submit.setEnabled(numberAsString.length() > 0 && passwordAsString.length() > 0);
         }
     };
 
@@ -46,11 +50,13 @@ public class loginScreen extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(loginScreen.this, codeScreen.class);
+                Intent intent = new Intent(loginScreen.this, Quiz1Activity.class);
                 startActivity(intent);
             }
         });
     }
-}
+
+    };
+
 
 
