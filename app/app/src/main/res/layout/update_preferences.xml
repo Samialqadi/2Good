@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Quiz1Activity">
+    tools:context=".UpdatePreferenceActivity">
 
     <TextView
         android:id="@+id/instructions"
@@ -12,23 +12,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:gravity="center"
-        android:text="Select the habits you want to stay away from!"
+        android:text="Change your habit and charity preferences here."
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@id/help"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/help"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="We're here to help."
-        app:layout_constraintBottom_toTopOf="@id/habitList"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/instructions" />
 
     <Button
         android:id="@+id/submitButton"
@@ -40,10 +29,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/habitList" />
+        app:layout_constraintTop_toBottomOf="@id/charityList" />
 
     <LinearLayout
-        android:id="@+id/habitList"
+        android:id="@+id/charityList"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
@@ -56,59 +45,57 @@
         app:layout_constraintTop_toBottomOf="@+id/help">
 
         <CheckBox
-            android:id="@+id/habit1"
+            android:id="@+id/charity1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:paddingLeft="8dp"
-            android:text="Alcohol" />
+            android:paddingLeft="8dp" />
 
         <CheckBox
-            android:id="@+id/habit2"
+            android:id="@+id/charity2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:paddingLeft="8dp"
-            android:text="Coffee Shops" />
+            android:paddingLeft="8dp" />
 
         <CheckBox
-            android:id="@+id/habit3"
+            android:id="@+id/charity3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:paddingLeft="8dp"
-            android:text="Gambling" />
+            android:paddingLeft="8dp" />
 
         <CheckBox
-            android:id="@+id/habit4"
+            android:id="@+id/charity4"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:paddingLeft="8dp"
-            android:text="Restaurants" />
+            android:paddingLeft="8dp" />
 
         <CheckBox
-            android:id="@+id/habit5"
+            android:id="@+id/charity5"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:paddingLeft="8dp"
-            android:text="Clothes" />
+            android:paddingLeft="8dp" />
+
     </LinearLayout>
 
-    <Button
-        android:id="@+id/skip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Skip"
+    <ProgressBar
+        android:id="@+id/progressBarQuiz2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_weight="1"
+        android:scrollbarSize="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/submitButton"
-        app:layout_constraintTop_toBottomOf="@+id/habitList" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

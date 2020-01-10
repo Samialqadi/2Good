@@ -76,7 +76,6 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
         intent.putExtra("card", card);
         intent.putExtra("transactions", transactions);
         startActivity(intent);
-
     }
 
     public void onClick(View v) {

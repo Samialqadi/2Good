@@ -167,9 +167,11 @@ public class Quiz1Activity extends AppCompatActivity {
         ApiSingleton.getInstance(this).addToRequestQueue(jsonArrayRequest);
 
         addListenerOnButton();
+        addListenerOnSkip();
     }
 
     private Button btnSubmit;
+    private Button btnSkip;
 
     public void addListenerOnButton() {
         btnSubmit = findViewById(R.id.submitButton);
@@ -190,6 +192,19 @@ public class Quiz1Activity extends AppCompatActivity {
                 // Send data to the next Quiz and start the activity
                 Intent intent = new Intent(Quiz1Activity.this, Quiz2Activity.class);
                 intent.putExtra("habitList", habitsChecked);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void addListenerOnSkip() {
+        btnSkip = findViewById(R.id.skip);
+
+        btnSkip.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Quiz1Activity.this, Quiz2Activity.class);
                 startActivity(intent);
             }
         });

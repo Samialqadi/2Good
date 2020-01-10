@@ -30,11 +30,27 @@ public class Quiz2Activity extends AppCompatActivity {
     List<String> habits;
     public ArrayList<Charity> charityList = new ArrayList<>();
     public String url = "https://api.data.charitynavigator.org/v2/Organizations?app_id=a8597fc8&app_key=e2f022d55899528abddc3181808a6c94&rated=true";
+    CheckBox cb1;
+    CheckBox cb2;
+    CheckBox cb3;
+    CheckBox cb4;
+    CheckBox cb5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz2);
+
+        cb1 = findViewById(R.id.charity1);
+        cb1.setVisibility(View.INVISIBLE);
+        cb2 = findViewById(R.id.charity2);
+        cb2.setVisibility(View.INVISIBLE);
+        cb3 = findViewById(R.id.charity3);
+        cb3.setVisibility(View.INVISIBLE);
+        cb4 = findViewById(R.id.charity4);
+        cb4.setVisibility(View.INVISIBLE);
+        cb5 = findViewById(R.id.charity5);
+        cb5.setVisibility(View.INVISIBLE);
 
         habits = (List<String>) getIntent().getSerializableExtra("habitList");
 
@@ -91,7 +107,11 @@ public class Quiz2Activity extends AppCompatActivity {
 
                                 ProgressBar pb = findViewById(R.id.progressBarQuiz2);
                                 pb.setVisibility(View.INVISIBLE);
-
+                                cb1.setVisibility(View.VISIBLE);
+                                cb2.setVisibility(View.VISIBLE);
+                                cb3.setVisibility(View.VISIBLE);
+                                cb4.setVisibility(View.VISIBLE);
+                                cb5.setVisibility(View.VISIBLE);
 
                                 LinearLayout charityLayout = findViewById(R.id.charityList);
                                 CheckBox charityBox = (CheckBox) charityLayout.getChildAt(i);
