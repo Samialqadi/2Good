@@ -55,6 +55,7 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
 
     private TextView hello;
     private TextView balance;
+    private TextView cardStatus;
 
     private GeofencingClient geofencingClient;
     private PendingIntent geofencePendingIntent;
@@ -70,6 +71,8 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
         geofencingClient = LocationServices.getGeofencingClient(this);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         geofenceService = new GeofenceService(geofencingClient);
+        cardStatus = findViewById(R.id.cardDisabled);
+        checkCardStatus();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, getString(R.string.backend_url) + "v0/geofence/getPlaces", null, new Response.Listener<JSONObject>() {
@@ -213,5 +216,56 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
                         // ...
                     }
                 });
+    }
+
+    private void checkCardStatus() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, getString(R.string.backend_url) + "v0/geofence/getCardStatus", null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        try {
+                            if (object.getBoolean("status")) {
+                                cardStatus.setVisibility(View.VISIBLE);
+                            } else {
+                                cardStatus.setVisibility(View.INVISIBLE);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        /* TODO: Handle error */
+                        Log.e("Volley Places", error.toString());
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String>  params = new HashMap<>();
+                @SuppressLint("MissingPermission")
+                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+                if (location != null) {
+                    lastKnownLocation = location.getLatitude() + "," + location.getLongitude();
+                }
+                Log.d("Local", lastKnownLocation);
+                params.put("location", lastKnownLocation);
+                params.put("type", "cafe");
+
+                return params;
+            }
+        };
+
+        // Access the RequestQueue through your singleton class.
+        ApiSingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkCardStatus();
     }
 }
