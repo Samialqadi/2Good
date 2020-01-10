@@ -1,6 +1,8 @@
 package com.dawidjk2.sesfrontend;
 
-public class Card {
+import java.io.Serializable;
+
+public class Card implements Serializable {
 
     private String cardName;
     private String cardNumber;

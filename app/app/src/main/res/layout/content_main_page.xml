@@ -8,28 +8,16 @@
     tools:context=".MainPageActivity"
     tools:showIn="@layout/activity_main_page">
 
-    <ImageView
-        android:id="@+id/mainPagePhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintCircleRadius="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars"
-        />
-
     <TextView
         android:id="@+id/mainPageHello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:text="Welcome back, XXX!"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainPagePhoto" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/mainPageBalanceLabel"
@@ -56,8 +44,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mainPageCards"
-        android:layout_width="375dp"
-        android:layout_height="351dp"
+        android:layout_width="379dp"
+        android:layout_height="433dp"
         android:layout_marginTop="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
