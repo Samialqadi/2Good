@@ -39,7 +39,7 @@ app.get('/v0/charity/getCharities', function (req, res) {
 app.post('/v0/charity/updatePref', function (req, res) {
     var charities = req.body.charity_id
     var blacklisted = req.body.blacklisted
-    var firebaseUserID = req.body._id
+    var firebaseUserID = process.env.FIREBASE_TEST_ACC
     admin.database().ref('/users/' + firebaseUserID + '/pref/').update({
         blacklisted: blacklisted,
         charities: charities
@@ -47,8 +47,26 @@ app.post('/v0/charity/updatePref', function (req, res) {
     res.status(200).send({ status: "success!" });
 })
 
+app.post('/v0/charity/updateBlacklistPref', function (req, res) {
+    var blacklisted = req.body.blacklisted
+    var firebaseUserID = process.env.FIREBASE_TEST_ACC
+    admin.database().ref('/users/' + firebaseUserID + '/pref/').update({
+        blacklisted: blacklisted,
+    })
+    res.status(200).send({ status: "success!" });
+})
+
+app.post('/v0/charity/updateCharitiesPref', function (req, res) {
+    var charities = req.body.charity_id
+    var firebaseUserID = process.env.FIREBASE_TEST_ACC
+    admin.database().ref('/users/' + firebaseUserID + '/pref/').update({
+        charities: charities
+    })
+    res.status(200).send({ status: "success!" });
+})
+
 app.get('/v0/charity/getPref', function(req, res) {
-    var firebaseUserID = req.query._id
+    var firebaseUserID = process.env.FIREBASE_TEST_ACC
     db.ref("/users/" + firebaseUserID + "/pref").on("value", function(snapshot) {
         res.status(200).send(snapshot.val())
     })
