@@ -15,7 +15,9 @@ import android.widget.ProgressBar;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.dawidjk2.sesfrontend.Models.Charity;
 import com.dawidjk2.sesfrontend.Singletons.ApiSingleton;
 
@@ -23,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -69,13 +72,61 @@ public class Quiz2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ArrayList<String> charityList = new ArrayList<>();
+                JSONArray array = new JSONArray();
 
                 LinearLayout charitylayout = findViewById(R.id.charityList);
                 int count = charitylayout.getChildCount();
                 for (int i = 0; i < count; i++) {
                     CheckBox charity = (CheckBox) charitylayout.getChildAt(i);
-                    if (charity.isChecked()) charityList.add((String) charity.getText());
+                    if (charity.isChecked()) {
+                        charityList.add((String) charity.getText());
+                        array.put(charity.getText());
+                    }
                 }
+
+                JSONObject object = new JSONObject();
+                try {
+                    object.put("charity_id", array);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                final String requestBody = object.toString();
+
+                StringRequest jsonObjectRequest = new StringRequest
+                        (Request.Method.POST, getString(R.string.backend_url) + "v0/charity/updateCharitiesPref", new Response.Listener<String>() {
+
+
+                            @Override
+                            public void onResponse(String response) {
+                                Log.d("Blacklist", response);
+                            }
+                        }, new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                /* TODO: Handle error */
+                                Log.e("Volley Add Blacklist", error.toString());
+                            }
+                        }) {
+                    @Override
+                    public String getBodyContentType() {
+                        return "application/json; charset=utf-8";
+                    }
+
+                    @Override
+                    public byte[] getBody() {
+                        try {
+                            return requestBody == null ? null : requestBody.getBytes("utf-8");
+                        } catch (UnsupportedEncodingException uee) {
+                            VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                            return null;
+                        }
+                    }
+                };
+
+                // Access the RequestQueue through your singleton class.
+                ApiSingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
 
                 Intent intent = new Intent(Quiz2Activity.this, MainPageActivity.class);
                 startActivity(intent);

@@ -12,17 +12,13 @@ import android.util.Log;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.dawidjk2.sesfrontend.Models.Charity;
-import com.dawidjk2.sesfrontend.Models.Geofence;
-import com.dawidjk2.sesfrontend.Services.GeofenceBroadcastReceiver;
-import com.dawidjk2.sesfrontend.Services.GeofenceService;
 import com.dawidjk2.sesfrontend.Singletons.ApiSingleton;
-import com.google.android.gms.location.GeofencingClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,9 +29,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Quiz1Activity extends AppCompatActivity {
     public ArrayList<Charity> charityList = new ArrayList<>();
@@ -99,17 +94,65 @@ public class Quiz1Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ArrayList<String> habitsChecked = new ArrayList<>();
+                JSONArray array = new JSONArray();
 
                 LinearLayout habitList = findViewById(R.id.habitList);
                 int count = habitList.getChildCount();
                 for (int i = 0; i < count; i++) {
                     CheckBox habit = (CheckBox) habitList.getChildAt(i);
-                    if (habit.isChecked()) habitsChecked.add((String) habit.getText());
+                    if (habit.isChecked()) {
+                        habitsChecked.add((String) habit.getText());
+                        array.put(habit.getText());
+                    }
                 }
+
+                JSONObject object = new JSONObject();
+                try {
+                    object.put("blacklisted", array);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                final String requestBody = object.toString();
+
+                StringRequest jsonObjectRequest = new StringRequest
+                        (Request.Method.POST, getString(R.string.backend_url) + "v0/charity/updateBlacklistPref", new Response.Listener<String>() {
+
+
+                            @Override
+                            public void onResponse(String response) {
+                                Log.d("Blacklist", response);
+                            }
+                        }, new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                /* TODO: Handle error */
+                                Log.e("Volley Add Blacklist", error.toString());
+                            }
+                        }) {
+                    @Override
+                    public String getBodyContentType() {
+                        return "application/json; charset=utf-8";
+                    }
+
+                    @Override
+                    public byte[] getBody() {
+                        try {
+                            return requestBody == null ? null : requestBody.getBytes("utf-8");
+                        } catch (UnsupportedEncodingException uee) {
+                            VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                            return null;
+                        }
+                    }
+                };
+
+                // Access the RequestQueue through your singleton class.
+                ApiSingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
 
                 // Send data to the next Quiz and start the activity
                 Intent intent = new Intent(Quiz1Activity.this, Quiz2Activity.class);
-                intent.putExtra("habitList", habitsChecked);
+
                 startActivity(intent);
             }
         });
