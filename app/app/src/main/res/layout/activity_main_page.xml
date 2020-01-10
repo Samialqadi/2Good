@@ -9,24 +9,33 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:foregroundTint="@android:color/white"
         app:layout_constraintTop_toTopOf="parent">
+
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:foregroundTint="#FFFFFF"
+            app:subtitleTextColor="#FAFFFFFF"
+            app:titleTextColor="#FFFFFF">
+
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/nav_bar_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_menu_black_24dp" />
+
             <TextView
                 android:id="@+id/menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="16dp"
                 android:minHeight="?actionBarSize"
+                android:padding="16dp"
                 android:text="@string/app_name"
+                android:textColor="@android:color/white"
                 android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>

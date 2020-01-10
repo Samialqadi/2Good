@@ -8,9 +8,10 @@
 
     <TextView
         android:id="@+id/prefsTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="394dp"
+        android:layout_height="112dp"
         android:layout_marginTop="40dp"
+        android:fontFamily="sans-serif-black"
         android:gravity="center"
         android:text="Choose the charities you want to donate spare change to!"
         android:textSize="30sp"
@@ -32,10 +33,12 @@
 
     <Button
         android:id="@+id/submitButton"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/c1red"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
