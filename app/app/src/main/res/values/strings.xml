@@ -1,6 +1,7 @@
 <resources>
+    <string name="app_name">2 Good</string>
+    <string name="backend_url">https://b69ec6ea.ngrok.io/</string>
     <string name="app_name">2Good</string>
-    <string name="backend_url">https://0c49b3d6.ngrok.io/</string>
     <string name="title_activity_main_page">MainPage</string>
     <string name="title_activity_expanded_card_page">ExpandedCardPage</string>
 </resources>

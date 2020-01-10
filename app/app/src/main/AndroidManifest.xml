@@ -16,7 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <receiver android:name=".Services.GeofenceBroadcastReceiver"/>
-
         <activity android:name=".loginScreen" />
         <activity android:name=".SplashActivity">
             android:screenOrientation="sensorPortrait">
