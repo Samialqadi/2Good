@@ -50,6 +50,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class MainPageActivity extends AppCompatActivity implements CardAdapter.OnItemListener, View.OnClickListener {
     private RecyclerView recyclerView;
@@ -66,11 +67,20 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
     private GeofenceService geofenceService;
     private LocationManager locationManager;
     public static String lastKnownLocation = "";
+    private String type = "";
+    private HashMap<String, String> convert;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_drawer_layout);
+
+        convert = new HashMap<>();
+        convert.put("Alcohol", "liquor_store, bar, night_club" );
+        convert.put("Coffee Shops", "cafe");
+        convert.put("Gambling", "casino");
+        convert.put("Restaurants", "restaurant");
+        convert.put("Clothes", "shoe_store, shopping_mall");
 
         geofencingClient = LocationServices.getGeofencingClient(this);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -80,27 +90,75 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
         getTotalCharity();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, getString(R.string.backend_url) + "v0/geofence/getPlaces", null, new Response.Listener<JSONObject>() {
+                (Request.Method.GET, getString(R.string.backend_url) + "v0/charity/getPref", null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject object) {
+
                         try {
-                            JSONArray locationArray = object.getJSONArray("locations");
-                            ArrayList<Geofence> geofenceArrayList = new ArrayList<>();
-                            Log.d("locationArray length", String.valueOf(locationArray.length()));
-                            for(int i = 0; i < locationArray.length(); ++i) {
-                                JSONObject location = locationArray.getJSONObject(i);
-                                Geofence geofence = new Geofence();
-                                geofence.latitude = location.getDouble("lat");
-                                geofence.longitude = location.getDouble("lng");
-                                geofence.key = location.getString("key");
-                                geofence.exp = 999999999999999999L;
-                                geofenceArrayList.add(geofence);
+                            JSONArray array = object.getJSONArray("blacklisted");
+
+                            for (int i = 0; i < array.length(); ++i) {
+                                type += convert.get(array.getString(i));
+
+                                if (i < array.length() - 1) {
+                                    type += ",";
+                                }
                             }
-                            geofenceService.addFences(geofenceArrayList,getString(R.string.backend_url), getApplicationContext());
-                            intializeGeofence();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                                (Request.Method.GET, getString(R.string.backend_url) + "v0/geofence/getPlaces", null, new Response.Listener<JSONObject>() {
+                                    @Override
+                                    public void onResponse(JSONObject object) {
+                                        try {
+                                            JSONArray locationArray = object.getJSONArray("locations");
+                                            ArrayList<Geofence> geofenceArrayList = new ArrayList<>();
+                                            Log.d("locationArray length", String.valueOf(locationArray.length()));
+                                            for(int i = 0; i < locationArray.length(); ++i) {
+                                                JSONObject location = locationArray.getJSONObject(i);
+                                                Geofence geofence = new Geofence();
+                                                geofence.latitude = location.getDouble("lat");
+                                                geofence.longitude = location.getDouble("lng");
+                                                try {
+                                                    geofence.key = location.getString("name");
+                                                } catch (Exception e) {
+                                                    geofence.key = "sdfsdgfdg";
+                                                }
+                                                geofence.exp = 999999999999999999L;
+                                                geofenceArrayList.add(geofence);
+                                            }
+                                            geofenceService.addFences(geofenceArrayList,getString(R.string.backend_url), getApplicationContext());
+                                            intializeGeofence();
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        /* TODO: Handle error */
+                                        Log.e("Volley Places", error.toString());
+                                    }
+                                }) {
+                            @Override
+                            public Map<String, String> getHeaders() {
+                                Map<String, String>  params = new HashMap<>();
+                                @SuppressLint("MissingPermission")
+                                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                                if (location != null) {
+                                    lastKnownLocation = location.getLatitude() + "," + location.getLongitude();
+                                }
+                                Log.d("Local", lastKnownLocation);
+                                params.put("location", lastKnownLocation);
+                                params.put("type", type);
+                                return params;
+                            }
+                        };
+
+                        // Access the RequestQueue through your singleton class.
+                        ApiSingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -108,21 +166,7 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
                         /* TODO: Handle error */
                         Log.e("Volley Places", error.toString());
                     }
-                }) {
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String>  params = new HashMap<>();
-                @SuppressLint("MissingPermission")
-                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                if (location != null) {
-                    lastKnownLocation = location.getLatitude() + "," + location.getLongitude();
-                }
-                Log.d("Local", lastKnownLocation);
-                params.put("location", lastKnownLocation);
-                params.put("type", "cafe");
-                return params;
-            }
-        };
+                });
 
         // Access the RequestQueue through your singleton class.
         ApiSingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
