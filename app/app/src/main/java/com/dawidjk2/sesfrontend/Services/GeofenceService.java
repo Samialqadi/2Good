@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class GeofenceService {
     private GeofencingClient geofencingClient;
     private ArrayList<com.google.android.gms.location.Geofence> geofenceList;
-    private int radius = 100;
+    private int radius = 30;
 
 
     public GeofenceService(GeofencingClient geofencingClient) {
@@ -35,7 +35,7 @@ public class GeofenceService {
 
     public GeofencingRequest getGeofencingRequest() {
         GeofencingRequest.Builder builder = new GeofencingRequest.Builder();
-        builder.setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER);
+        builder.setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER | GeofencingRequest.INITIAL_TRIGGER_DWELL);
         builder.addGeofences(geofenceList);
         return builder.build();
     }

@@ -34,7 +34,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent, 0);
 
-        if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_DWELL) {
+        if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER || geofenceTransition == Geofence.GEOFENCE_TRANSITION_DWELL) {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, context.getString(R.string.app_name))
                     .setSmallIcon(R.drawable.ic_logo)
                     .setContentTitle(context.getString(R.string.app_name))
