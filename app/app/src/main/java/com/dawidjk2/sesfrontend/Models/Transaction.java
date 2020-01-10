@@ -8,9 +8,9 @@ public class Transaction implements Serializable {
 
     private Card card;
     private String vendor;
-    private double amount;
+    private String amount;
 
-    public Transaction(Card of, String vendor, double amount) {
+    public Transaction(Card of, String vendor, String amount) {
         this.card = of;
         this.vendor = vendor;
         this.amount = amount;
@@ -32,11 +32,11 @@ public class Transaction implements Serializable {
         this.vendor = vendor;
     }
 
-    public double getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 }

@@ -18,7 +18,7 @@
 
         <receiver android:name=".Services.GeofenceBroadcastReceiver"/>
 
-        <activity android:name=".Quiz1Activity"
+        <activity android:name=".MainPageActivity"
             android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +28,7 @@
         <activity android:name=".Quiz2Activity"
             android:screenOrientation="sensorPortrait"
             android:label="does this work"/>
-        <activity android:name=".MainPageActivity"/>
+        <activity android:name=".UpdatePreferenceActivity"/>
         <activity android:name=".ExpandedCardActivity"/>
     </application>
 
