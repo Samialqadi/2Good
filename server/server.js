@@ -125,7 +125,6 @@ function updateTransactionHistories(firebaseUserID, capCustomerAccount) {
                 for(var j in parsedPurchaseBody) {
                     var firebaseUserID = process.env.FIREBASE_TEST_ACC
                     var charityValue = 1 - (parsedPurchaseBody[j].amount % 1)
-                    let test = 
                     db.ref('/users/' + firebaseUserID + '/transactions/'+accountID+ "/"+parsedPurchaseBody[j]._id).set({
                         _id:parsedPurchaseBody[j]._id,
                         amount:parsedPurchaseBody[j].amount,
@@ -143,14 +142,17 @@ function updateTransactionHistories(firebaseUserID, capCustomerAccount) {
     })
 }
 
-// cron.schedule('* * * * *', () => {
-//     updateTransactionHistories("T6mNyK7SA0Ss3IAAhvQD5It0m8Y2", process.env.CAP_CUST_ACC)
-// });
+cron.schedule('* * * * *', () => {
+    updateTransactionHistories(process.env.FIREBASE_TEST_ACC, process.env.CAP_CUST_ACC)
+});
 
 app.get('/v0/charity/getTransactions', function (req, res) {
     var accountNumber = req.query.accountNumber
     var firebaseUserID = process.env.FIREBASE_TEST_ACC
     var test = []
+    if(accountNumber == "") {
+        res.send('you fucked up')
+    }
     db.ref('/users/' + firebaseUserID + '/transactions/'+accountNumber).on("value", function(snapshot) {
         for (const [key, value] of Object.entries(snapshot.val())) {
             test.push(value)
@@ -162,7 +164,6 @@ app.get('/v0/charity/getTransactions', function (req, res) {
 app.get('/v0/charity/totalCharity', function(req, res) {
     var firebaseUserID = process.env.FIREBASE_TEST_ACC
     db.ref('/users/' + firebaseUserID + '/transactions/totalCharity').on("value", function(snapshot) {
-        console.log(snapshot.val())
         res.send(JSON.stringify({a: snapshot.val}))
     })
 })
@@ -185,8 +186,8 @@ app.get('/v0/charity/getMerchants', function (req, res) {
 })
 //// GEOFENCING STUFF
 app.get('/v0/geofence/getPlaces', function (req, res) {
-  const type = req.query.type || "";
-  const location = req.query.location || "";
+  const type = req.headers.type || "";
+  const location = req.headers.location || "";
   if (type == "" || location == "") {
     return res.error("Not all parameters provided");
   }
@@ -225,12 +226,10 @@ app.post('/v0/geofence/createGeofence', function(req, res){
         const radius = reqArray[i].radius || ""
         const expTime = reqArray[i].exp || ""
         const key = reqArray[i].key || ""
-        console.log(key)
+        console.log(reqArray[i])
         if(expTime == "" || radius == "" || longtitude == "" || latitude == "" || key == "") {
-            res.status(503).send('{"error": "OOPSIE WOOPSIE MADE A WHITTLE FUCKIE WUCKIE"}')
-            return;
+            continue;
         }
-
         db.ref("/users/" + process.env.FIREBASE_TEST_ACC + "/geofence/" + key).set({
             latitude: latitude,
             longtitude: longtitude,
@@ -238,9 +237,9 @@ app.post('/v0/geofence/createGeofence', function(req, res){
             expTime: expTime,
             key: key
         })
-        res.status(200).send("")
     }
-});
+    res.status(200).send("")
+  });
 
 app.get('/v0/geofence/getGeofences', function(req, res) {
     var firebaseUserID = process.env.FIREBASE_TEST_ACC
@@ -252,9 +251,8 @@ app.get('/v0/geofence/getGeofences', function(req, res) {
 app.post('/v0/geofence/setCardStatus', function(req, res) {
     var firebaseUserID = process.env.FIREBASE_TEST_ACC
     const status = req.body.status || ""
-    console.log(status)
     if(status == "") {
-        res.status(503).send('{"error": "missing the thing brother"}')
+        res.status(422).send('{"error": "missing the thing brother"}')
         return
     }
     db.ref('/users/' + firebaseUserID + "/isCardDisabled").set(status)
