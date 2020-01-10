@@ -22,7 +22,9 @@ public class loginScreen extends AppCompatActivity {
         setContentView(R.layout.activity_login_screen);
 
         phoneNumber = findViewById(R.id.usersPhoneNumber);
+        submit = findViewById(R.id.phoneButton);
         addOnClickListenerToSubmit();
+        phoneNumber.addTextChangedListener(textWatcher);
     }
 
     private TextWatcher textWatcher = new TextWatcher() {
@@ -34,13 +36,12 @@ public class loginScreen extends AppCompatActivity {
 
         @Override
         public void afterTextChanged(Editable s) {
-            submit.setEnabled(phoneNumber.toString().trim().length() == 10);
+            String numberAsString = phoneNumber.getText().toString();
+            submit.setEnabled(numberAsString.length() == 10);
         }
     };
 
     public void addOnClickListenerToSubmit() {
-        submit = findViewById(R.id.phoneButton);
-
         submit.setOnClickListener(new View.OnClickListener() {
 
             @Override
