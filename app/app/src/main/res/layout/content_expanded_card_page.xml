@@ -54,10 +54,12 @@
         app:layout_constraintTop_toBottomOf="@+id/expandedCardPagePreviousActivityLabel" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/allTransactions"
         android:layout_width="373dp"
         android:layout_height="568dp"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/expandedCardPagePreviousActivity" />
+        app:layout_constraintTop_toBottomOf="@+id/expandedCardPagePreviousActivity"
+        tools:listitem="@layout/transaction"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
