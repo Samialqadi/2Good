@@ -6,7 +6,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-public class ApiSingleton {
+public class    ApiSingleton {
     private static ApiSingleton instance;
     private RequestQueue requestQueue;
     private static Context ctx;

@@ -14,6 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".codeScreen"></activity>
+        <activity android:name=".loginScreen" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,8 +26,7 @@
         <activity
             android:name=".Quiz1Activity"
             android:label="does this work"
-            android:screenOrientation="sensorPortrait">
-        </activity>
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".Quiz2Activity"
             android:label="does this work"
