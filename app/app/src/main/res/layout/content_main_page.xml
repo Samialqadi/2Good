@@ -44,8 +44,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mainPageCards"
-        android:layout_width="379dp"
-        android:layout_height="433dp"
+        android:layout_width="388dp"
+        android:layout_height="472dp"
         android:layout_marginTop="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
