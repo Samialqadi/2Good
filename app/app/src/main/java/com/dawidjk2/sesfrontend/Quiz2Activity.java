@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -22,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Quiz2Activity extends AppCompatActivity {
@@ -36,6 +38,7 @@ public class Quiz2Activity extends AppCompatActivity {
 
         habits = (List<String>) getIntent().getSerializableExtra("habitList");
 
+        getCharities();
         addListenerOnButton();
     }
 
@@ -70,24 +73,38 @@ public class Quiz2Activity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONArray array) {
-                        ArrayList<String> stringArrayList = new ArrayList<>();
                         try {
                             for(int i = 0; i < array.length(); ++i) {
                                 JSONObject object = array.getJSONObject(i);
                                 Charity charity = new Charity();
                                 charity.charityName = object.getString("charityName");//name
                                 charity.websiteURL = object.getString("websiteURL");//website
+
                                 JSONObject cause = object.getJSONObject("cause");//cause
                                 charity.generalCause = cause.getString("causeName");
                                 charity.mission = object.getString("mission");//mission
                                 charity.tagline = object.getString("tagLine"); //tag line
+
                                 JSONObject rating = object.getJSONObject("currentRating");//rating
                                 charity.rating = rating.getInt("rating");//rating
                                 charityList.add(charity);
-                                stringArrayList.add(rating.getInt("rating") + "\n");
+
+                                ProgressBar pb = findViewById(R.id.progressBarQuiz2);
+                                pb.setVisibility(View.INVISIBLE);
+
+
+                                LinearLayout charityLayout = findViewById(R.id.charityList);
+                                CheckBox charityBox = (CheckBox) charityLayout.getChildAt(i);
+                                if (charityBox != null) charityBox.setText(charity.charityName);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
+                        }
+
+                        //sort by rating
+                        Collections.sort(charityList);
+                        for (Charity charity : charityList) {
+                            Log.d("Charity rating", String.valueOf(charity.rating));
                         }
 
                     }

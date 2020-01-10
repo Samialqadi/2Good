@@ -3,15 +3,17 @@ package com.dawidjk2.sesfrontend;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class MainPageActivity extends AppCompatActivity implements CardAdapter.OnItemListener {
+public class MainPageActivity extends AppCompatActivity implements CardAdapter.OnItemListener, View.OnClickListener {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -25,7 +27,7 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_page);
+        setContentView(R.layout.nav_drawer_layout);
 
         // Dummy data
         String name = "Sami";
@@ -47,7 +49,7 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
         myDataset.add(new Card("Card 5", "24567890", "200.00"));
 
         // Handle the recycle view for all cards
-        recyclerView = (RecyclerView) findViewById(R.id.mainPageCards);
+        recyclerView = findViewById(R.id.mainPageCards);
         recyclerView.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(this);
@@ -55,8 +57,6 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
 
         adapter = new CardAdapter(myDataset, this);
         recyclerView.setAdapter(adapter);
-
-
     }
 
     @Override
@@ -75,5 +75,16 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
         intent.putExtra("card", card);
         intent.putExtra("transactions", transactions);
         startActivity(intent);
+
+        findViewById(R.id.nav_bar_button).setOnClickListener(this);
+    }
+
+    public void onClick(View v) {
+        DrawerLayout navDrawer = findViewById(R.id.drawer_layout);
+        if (!navDrawer.isDrawerOpen(GravityCompat.START)) {
+            navDrawer.openDrawer(GravityCompat.START);
+        } else {
+            navDrawer.closeDrawer(GravityCompat.END);
+        }
     }
 }
