@@ -21,11 +21,11 @@
 
     <TextView
         android:id="@+id/name"
-        android:textColor="@color/cardview_light_background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Temp Name"
-        android:textSize="20dp"
+        android:text="2Good"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="72dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
