@@ -30,6 +30,8 @@ import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Quiz1Activity extends AppCompatActivity {
     public ArrayList<Charity> charityList = new ArrayList<>();
@@ -80,13 +82,14 @@ public class Quiz1Activity extends AppCompatActivity {
         geofenceService = new GeofenceService(geofencingClient);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, getString(R.string.backend_url), null, new Response.Listener<JSONObject>() {
+                (Request.Method.GET, getString(R.string.backend_url) + "v0/geofence/getPlaces", null, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject object) {
                         try {
                             JSONArray locationArray = object.getJSONArray("locations");
                             ArrayList<Geofence> geofenceArrayList = new ArrayList<>();
+                            Log.d("locationArray length", String.valueOf(locationArray.length()));
 
                             for(int i = 0; i < locationArray.length(); ++i) {
                                 JSONObject location = locationArray.getJSONObject(i);
@@ -94,6 +97,7 @@ public class Quiz1Activity extends AppCompatActivity {
                                 geofence.latitude = location.getDouble("lat");
                                 geofence.longitude = location.getDouble("lng");
                                 geofence.key = location.getString("key");
+                                geofence.exp = 999999999999999999L;
 
                                 geofenceArrayList.add(geofence);
                             }
@@ -111,7 +115,16 @@ public class Quiz1Activity extends AppCompatActivity {
                         /* TODO: Handle error */
                         Log.e("Volley", error.toString());
                     }
-                });
+                }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String>  params = new HashMap<>();
+                params.put("location", "31,31");
+                params.put("type", "cafe");
+
+                return params;
+            }
+        };
 
         // Access the RequestQueue through your singleton class.
         ApiSingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
@@ -167,7 +180,7 @@ public class Quiz1Activity extends AppCompatActivity {
             public void onClick(View v) {
                 ArrayList<String> habitsChecked = new ArrayList<>();
 
-                LinearLayout habitList = (LinearLayout) findViewById(R.id.habitList);
+                LinearLayout habitList = findViewById(R.id.habitList);
                 int count = habitList.getChildCount();
                 for (int i = 0; i < count; i++) {
                     CheckBox habit = (CheckBox) habitList.getChildAt(i);

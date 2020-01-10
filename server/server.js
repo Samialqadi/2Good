@@ -99,11 +99,11 @@ function updateTransactionHistories(firebaseUserID, capCustomerAccount) {
 }
 
 app.get('/v0/geofence/getPlaces', function (req, res) {
-  const type = req.query.type || "";
-  const location = req.query.location || "";
+  const type = req.headers.type || "";
+  const location = req.headers.location || "";
 
   if (type == "" || location == "") {
-    return res.error("Not all parameters provided");
+    return res.send("Not all parameters provided");
   }
 
   var options = {

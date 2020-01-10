@@ -14,6 +14,7 @@ public class GeofenceService {
 
     GeofenceService(GeofencingClient geofencingClient) {
         this.geofencingClient = geofencingClient;
+        geofenceList = new ArrayList<>();
     }
 
     public void addFences(ArrayList<Geofence> fences) {
@@ -25,7 +26,8 @@ public class GeofenceService {
                             geofence.longitude,
                             radius
                     )
-                    .setTransitionTypes(com.google.android.gms.location.Geofence.GEOFENCE_TRANSITION_DWELL |
+                    .setExpirationDuration(geofence.exp)
+                    .setTransitionTypes(com.google.android.gms.location.Geofence.GEOFENCE_TRANSITION_ENTER |
                             com.google.android.gms.location.Geofence.GEOFENCE_TRANSITION_EXIT)
                     .build());
         }

@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">SES Frontend</string>
-    <string name="backend_url">http://127.0.0.1:5000</string>
+    <string name="backend_url">https://0c49b3d6.ngrok.io/</string>
 </resources>
