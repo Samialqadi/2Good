@@ -92,7 +92,7 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
                                 geofenceArrayList.add(geofence);
                             }
 
-                            geofenceService.addFences(geofenceArrayList);
+                            geofenceService.addFences(geofenceArrayList,getString(R.string.backend_url), getApplicationContext());
                             intializeGeofence();
                         } catch (JSONException e) {
                             e.printStackTrace();
