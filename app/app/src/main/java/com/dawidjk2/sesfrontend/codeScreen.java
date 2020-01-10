@@ -12,7 +12,7 @@ import android.widget.EditText;
 
 public class codeScreen extends AppCompatActivity {
 
-    private EditText phoneNumber;
+    private EditText userCode;
 
     private Button codeButton;
 
@@ -20,9 +20,10 @@ public class codeScreen extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code_screen);
-        phoneNumber = findViewById(R.id.usersPhoneNumber);
+        userCode = findViewById(R.id.userCode);
         codeButton = findViewById(R.id.codeButton);
         addOnClickListenerToSubmit();
+        userCode.addTextChangedListener(textWatcher);
     }
 
     private TextWatcher textWatcher = new TextWatcher() {
@@ -34,7 +35,9 @@ public class codeScreen extends AppCompatActivity {
 
         @Override
         public void afterTextChanged(Editable s) {
-            codeButton.setEnabled(phoneNumber.toString().trim().length() == 10);
+            String numberAsString = userCode.getText().toString();
+            String max = numberAsString;
+            codeButton.setEnabled(numberAsString.length() == 6);
         }
     };
 
