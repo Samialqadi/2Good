@@ -3,6 +3,7 @@ package com.dawidjk2.sesfrontend;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -29,6 +30,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Quiz2Activity extends AppCompatActivity {
     List<String> habits;
@@ -130,6 +132,10 @@ public class Quiz2Activity extends AppCompatActivity {
 
                 Intent intent = new Intent(Quiz2Activity.this, MainPageActivity.class);
                 startActivity(intent);
+                SharedPreferences.Editor editor = getSharedPreferences("appState", MODE_PRIVATE).edit();
+                editor.putString("state", "LoggedIn");
+                editor.putLong("ExpiredDate", System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(60*24*365));
+                editor.apply();
             }
         });
 

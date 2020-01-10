@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -41,11 +42,21 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run(){
-                Intent homeIntent = new Intent(SplashActivity.this, loginScreen.class);
-                startActivity(homeIntent);
-                finish();
+                SharedPreferences sharedPrefs = getApplicationContext().getSharedPreferences("appState", MODE_PRIVATE);
+                String prefString = sharedPrefs.getString("state", "");
+                System.out.println(prefString);
+                if (prefString.equals("LoggedIn")) {
+                    System.out.println("We ARE INSIDE LOGGED IN!");
+                    Intent homeIntent = new Intent(SplashActivity.this, MainPageActivity.class);
+                    startActivity(homeIntent);
+                    finish();
+                } else {
+                    System.out.println("WE ARE NOT INSIDE THE LOGGED IN!!");
+                    Intent homeIntent = new Intent(SplashActivity.this, loginScreen.class);
+                    startActivity(homeIntent);
+                    finish();
+                }
             }
-
         }, SPLASH_TIME_OUT);
     }
 
