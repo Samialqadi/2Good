@@ -174,5 +174,13 @@ app.post('/v0/geofence/setCardStatus', function(req, res) {
   res.status(200).send("")
 })
 
+app.get('/v0/geofence/getCardStatus', function(req, res) {
+  var firebaseUserID = process.env.FIREBASE_TEST_ACC
+  db.ref('/users/' + firebaseUserID + '/isCardDisabled').on("value", function (snapshot) {
+    console.log(snapshot.val());
+      res.status(200).send(snapshot.val())
+  })
+})
+
 app.listen(port, () => console.log(`Trash State School Coder server running on: ${port}!`))
 

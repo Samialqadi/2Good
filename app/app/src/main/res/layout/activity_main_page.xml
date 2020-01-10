@@ -42,4 +42,18 @@
 
     <include layout="@layout/content_main_page" />
 
+    <TextView
+        android:id="@+id/cardDisabled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:background="#FF0303"
+        android:backgroundTintMode="add"
+        android:text="Cards are Disabled"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
