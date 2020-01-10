@@ -1,4 +1,4 @@
-package com.dawidjk2.sesfrontend;
+package com.dawidjk2.sesfrontend.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +6,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.dawidjk2.sesfrontend.R;
+import com.dawidjk2.sesfrontend.Models.Transaction;
 
 import java.util.ArrayList;
 

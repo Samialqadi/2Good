@@ -11,6 +11,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dawidjk2.sesfrontend.Adapters.CardAdapter;
+import com.dawidjk2.sesfrontend.Models.Card;
+import com.dawidjk2.sesfrontend.Models.Transaction;
+
 import java.util.ArrayList;
 
 public class MainPageActivity extends AppCompatActivity implements CardAdapter.OnItemListener, View.OnClickListener {

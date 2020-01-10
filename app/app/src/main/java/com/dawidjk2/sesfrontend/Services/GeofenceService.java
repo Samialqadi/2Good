@@ -1,4 +1,4 @@
-package com.dawidjk2.sesfrontend;
+package com.dawidjk2.sesfrontend.Services;
 
 import com.dawidjk2.sesfrontend.Models.Geofence;
 import com.google.android.gms.location.GeofencingClient;

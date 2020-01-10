@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
 
-        <receiver android:name=".GeofenceBroadcastReceiver"/>
+        <receiver android:name=".Services.GeofenceBroadcastReceiver"/>
 
         <activity android:name=".Quiz1Activity"
             android:screenOrientation="sensorPortrait">

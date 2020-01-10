@@ -1,4 +1,6 @@
-package com.dawidjk2.sesfrontend;
+package com.dawidjk2.sesfrontend.Models;
+
+import com.dawidjk2.sesfrontend.Models.Card;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package com.dawidjk2.sesfrontend;
+package com.dawidjk2.sesfrontend.Models;
 
 import java.io.Serializable;
 

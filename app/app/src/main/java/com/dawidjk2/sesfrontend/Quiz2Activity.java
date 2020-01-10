@@ -17,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.dawidjk2.sesfrontend.Models.Charity;
+import com.dawidjk2.sesfrontend.Singletons.ApiSingleton;
 
 import org.json.JSONArray;
 import org.json.JSONException;

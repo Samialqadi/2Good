@@ -1,4 +1,4 @@
-package com.dawidjk2.sesfrontend;
+package com.dawidjk2.sesfrontend.Services;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.dawidjk2.sesfrontend;
+package com.dawidjk2.sesfrontend.Singletons;
 
 import android.content.Context;
 
