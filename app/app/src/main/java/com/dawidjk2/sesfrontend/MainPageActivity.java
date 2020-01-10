@@ -60,28 +60,12 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
     private PendingIntent geofencePendingIntent;
     private GeofenceService geofenceService;
     private LocationManager locationManager;
-    private FusedLocationProviderClient fusedLocationClient;
     public static String lastKnownLocation = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_drawer_layout);
-
-        createNotificationChannel();
-
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        // Got last known location. In some rare situations this can be null.
-                        if (location != null) {
-                            // Logic to handle location object
-                            lastKnownLocation = location.getLatitude() + "," + location.getLongitude();
-                        }
-                    }
-                });
 
         geofencingClient = LocationServices.getGeofencingClient(this);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -108,7 +92,7 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
                                 geofenceArrayList.add(geofence);
                             }
 
-                            geofenceService.addFences(geofenceArrayList);
+                            geofenceService.addFences(geofenceArrayList,getString(R.string.backend_url), getApplicationContext());
                             intializeGeofence();
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -229,21 +213,5 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
                         // ...
                     }
                 });
-    }
-
-    private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = getString(R.string.app_name);
-            String description = getString(R.string.app_name);
-            int importance = NotificationManager.IMPORTANCE_HIGH;
-            NotificationChannel channel = new NotificationChannel(getString(R.string.app_name), name, importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
     }
 }
