@@ -81,18 +81,21 @@ app.post('/v0/charity/createDonationAccount', function (req, res) {
     })
 })
 
-app.get('/v0/charity/updateTransactions', function (req, res) {
-    res.send(updateTransactionHistories(process.env.FIREBASE_TEST_ACC, process.env.CAP_CUST_ACC))
+app.get('/v0/charity/getAccounts', function(req, res) {
+    var options = { method: 'GET',
+    url: 'http://api.reimaginebanking.com/accounts',
+    qs: { key: 'fb6115503f4e5c0d96debdf0fb760ec3' },
+    headers: 
+    { 'Postman-Token': '7588cdb0-d6f6-47bf-b815-a097f441173a',
+        'cache-control': 'no-cache',
+        Accept: 'application/json' } };
+
+    request(options, function (error, response, body) {
+    if (error) throw new Error(error);
+    res.status(200).send(JSON.parse(body))
+    });
+
 })
-app.get('/v0/charity/getTransactions', function (req, res) {
-    var firebaseUserID = process.env.FIREBASE_TEST_ACC
-    db.ref('/users/' + firebaseUserID + '/transactions/').on("value", function(snapshot) {
-        res.status(200).send(snapshot.val())
-    })
-})
-// cron.schedule('* * * * *', () => {
-//     updateTransactionHistories("T6mNyK7SA0Ss3IAAhvQD5It0m8Y2", process.env.CAP_CUST_ACC)
-// });
 
 function updateTransactionHistories(firebaseUserID, capCustomerAccount) {
     var options = { method: 'GET',
@@ -102,23 +105,25 @@ function updateTransactionHistories(firebaseUserID, capCustomerAccount) {
     request(options, function (error, response, body) {
     if (error) throw new Error(error);
     var resp = JSON.parse(body)
-    var newSnap
-    admin.database().ref('/users/' + firebaseUserID + '/transactions/').on("value", function(snapshot) {
-        console.log(newSnap)
-        newSnap = snapshot.val();
-        for(var i = 0; i < resp.length; i++) {
-
-        }
+    for(var i = 0; i < resp.length; i++) {
+        resp[i].charity = 1 - (resp[i].amount % 1)
+    }
+    console.log(resp)
     })
-    });
 }
 
-function History(_id, amount) {
-    this._id = _id
-    this.amount = amount
-    this.charityAmount = 1 - ((amount % 1) && 1)
-}
+// cron.schedule('* * * * *', () => {
+//     updateTransactionHistories("T6mNyK7SA0Ss3IAAhvQD5It0m8Y2", process.env.CAP_CUST_ACC)
+// });
 
+app.get('/v0/charity/getTransactions', function (req, res) {
+    var accountNumber = req.query.accountNumber
+
+})
+
+app.get('/v0/charity/updateTransactions', function (req, res) {
+    res.send(updateTransactionHistories(process.env.FIREBASE_TEST_ACC, process.env.CAP_CUST_ACC))
+})
 
 //// GEOFENCING STUFF
 app.get('/v0/geofence/getPlaces', function (req, res) {
@@ -178,4 +183,30 @@ app.post('/v0/geofence/createGeofence', function(req, res){
         res.status(200).send("")
     }
 });
+
+app.get('/v0/geofence/getGeofences', function(req, res) {
+    var firebaseUserID = process.env.FIREBASE_TEST_ACC
+    db.ref('/users/' + firebaseUserID + '/geofence/').on("value", function(snapshot) {
+        res.status(200).send(snapshot.val())
+    })
+})
+
+app.post('/v0/geofence/setCardStatus', function(req, res) {
+    var firebaseUserID = process.env.FIREBASE_TEST_ACC
+    const status = req.body.status || ""
+    console.log(status)
+    if(status == "") {
+        res.status(503).send('{"error": "missing the thing brother"}')
+        return
+    }
+    db.ref('/users/' + firebaseUserID + "/isCardDisabled").set(status)
+    res.status(200).send("")
+})
+
+app.get('/v0/geofence/getCardStatus', function(req, res) {
+    var firebaseUserID = process.env.FIREBASE_TEST_ACC
+    db.ref('/users/' + firebaseUserID + '/isCardDisabled').on("value", function(snapshot) {
+        res.status(200).send(snapshot.val())
+    })
+})
 app.listen(port, () => console.log(`Trash State School Coder server running on: ${port}!`))
