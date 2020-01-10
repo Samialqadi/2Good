@@ -6,6 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+<<<<<<< HEAD
     <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Charity" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
@@ -16,6 +17,21 @@
 =======
     <list default="true" id="21886138-53bc-427f-a46a-fc6fbbf5de28" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+=======
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="80b7ac5e-fa30-46f5-b842-28d1acdd486b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/GeofenceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/GeofenceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/Models/Geofence.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/Models/Geofence.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/Quiz1Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/Quiz1Activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+>>>>>>> geofence
     </list>
 >>>>>>> develop
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,10 +44,14 @@
     <option name="isMigrated" value="true" />
   </component>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_24" />
 =======
   <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_XL_API_28" />
 >>>>>>> develop
+=======
+  <component name="ExecutionTargetManager" SELECTED_TARGET="901KPBF2063301" />
+>>>>>>> geofence
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -40,6 +60,7 @@
     </system>
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
 <<<<<<< HEAD
     <splitter split-orientation="horizontal" split-proportion="0.5726496">
       <split-first>
@@ -216,11 +237,33 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
               <caret line="10" column="36" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
+=======
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/Quiz1Activity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="98" column="47" lean-forward="true" selection-start-line="98" selection-start-column="47" selection-end-line="98" selection-end-column="47" />
+              <folding>
+                <element signature="e#3246#3277#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider editor-type-id="android-manifest" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" column="61" lean-forward="true" selection-start-line="19" selection-start-column="61" selection-end-line="19" selection-end-column="61" />
+>>>>>>> geofence
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/nav_drawer_menu.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
@@ -250,6 +293,20 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
               <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+=======
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="57" selection-start-line="2" selection-start-column="57" selection-end-line="2" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/GeofenceBroadcastReceiver.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="25" selection-start-line="25" selection-end-line="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -257,6 +314,20 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/GeofenceService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="151">
+              <caret line="16" column="41" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+>>>>>>> geofence
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/Library/Android/sdk/platforms/android-29/android.jar!/android/view/View.class">
           <provider selected="true" editor-type-id="text-editor">
@@ -288,6 +359,9 @@
       </file>
     </leaf>
 >>>>>>> develop
+=======
+    </leaf>
+>>>>>>> geofence
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -312,6 +386,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/LocationSearch.java" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/Quiz1Activity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/Classes/Charity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/Quiz2Activity.java" />
@@ -342,6 +417,16 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main_page.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/nav_drawer_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/MainPageActivity.java" />
+=======
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/Models/Location.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/GeofenceBroadcastReceiver.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/Models/Geofence.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/Quiz1Activity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/GeofenceService.java" />
+>>>>>>> geofence
       </list>
     </option>
   </component>
@@ -360,20 +445,32 @@
     </navigator>
     <panes>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> geofence
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
             <path>
               <item name="SES Frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+<<<<<<< HEAD
               <item name="~/Documents/Development/CapitalOneSES/Hackathon/c1-SES-hackathon-entry/app" type="442cc68d:ScopeViewTreeModel$RootNode" />
             </path>
             <path>
               <item name="SES Frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="~/Documents/Development/CapitalOneSES/Hackathon/c1-SES-hackathon-entry/app" type="442cc68d:ScopeViewTreeModel$RootNode" />
+=======
+              <item name="~/Development/ses/c1-SES-hackathon-entry/app" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="SES Frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/Development/ses/c1-SES-hackathon-entry/app" type="442cc68d:ScopeViewTreeModel$RootNode" />
+>>>>>>> geofence
               <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="SES Frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+<<<<<<< HEAD
               <item name="~/Documents/Development/CapitalOneSES/Hackathon/c1-SES-hackathon-entry/app" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
@@ -506,6 +603,21 @@
             <path>
               <item name="SES Frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="~/Documents/capone/Hackathon/c1-SES-hackathon-entry/app" type="442cc68d:ScopeViewTreeModel$RootNode" />
+=======
+              <item name="~/Development/ses/c1-SES-hackathon-entry/app" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="SES Frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/Development/ses/c1-SES-hackathon-entry/app" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="SES Frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/Development/ses/c1-SES-hackathon-entry/app" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
@@ -513,26 +625,59 @@
             </path>
             <path>
               <item name="SES Frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/Development/ses/c1-SES-hackathon-entry/app" type="442cc68d:ScopeViewTreeModel$RootNode" />
+>>>>>>> geofence
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+<<<<<<< HEAD
+            </path>
+            <path>
+              <item name="SES Frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="~/Documents/capone/Hackathon/c1-SES-hackathon-entry/app" type="442cc68d:ScopeViewTreeModel$RootNode" />
+=======
+              <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="SES Frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/Development/ses/c1-SES-hackathon-entry/app" type="442cc68d:ScopeViewTreeModel$RootNode" />
+>>>>>>> geofence
               <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+<<<<<<< HEAD
             </path>
             <path>
               <item name="SES Frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="~/Documents/capone/Hackathon/c1-SES-hackathon-entry/app" type="442cc68d:ScopeViewTreeModel$RootNode" />
+=======
+              <item name="dawidjk2" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="SES Frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/Development/ses/c1-SES-hackathon-entry/app" type="442cc68d:ScopeViewTreeModel$RootNode" />
+>>>>>>> geofence
               <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="dawidjk2" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+<<<<<<< HEAD
             </path>
             <path>
               <item name="SES Frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="~/Documents/capone/Hackathon/c1-SES-hackathon-entry/app" type="442cc68d:ScopeViewTreeModel$RootNode" />
+=======
+              <item name="sesfrontend" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="SES Frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/Development/ses/c1-SES-hackathon-entry/app" type="442cc68d:ScopeViewTreeModel$RootNode" />
+>>>>>>> geofence
               <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
@@ -540,10 +685,18 @@
               <item name="com" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="dawidjk2" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="sesfrontend" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+<<<<<<< HEAD
             </path>
             <path>
               <item name="SES Frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="~/Documents/capone/Hackathon/c1-SES-hackathon-entry/app" type="442cc68d:ScopeViewTreeModel$RootNode" />
+=======
+              <item name="Models" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="SES Frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/Development/ses/c1-SES-hackathon-entry/app" type="442cc68d:ScopeViewTreeModel$RootNode" />
+>>>>>>> geofence
               <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
@@ -551,17 +704,34 @@
             </path>
             <path>
               <item name="SES Frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+<<<<<<< HEAD
               <item name="~/Documents/capone/Hackathon/c1-SES-hackathon-entry/app" type="442cc68d:ScopeViewTreeModel$RootNode" />
+=======
+              <item name="~/Development/ses/c1-SES-hackathon-entry/app" type="442cc68d:ScopeViewTreeModel$RootNode" />
+>>>>>>> geofence
               <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="res" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="layout" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
+<<<<<<< HEAD
+=======
+            <path>
+              <item name="SES Frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="~/Development/ses/c1-SES-hackathon-entry/app" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="res" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="values" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+>>>>>>> geofence
           </expand>
           <select />
         </subPane>
       </pane>
+<<<<<<< HEAD
       <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
@@ -656,14 +826,32 @@
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
               <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
 >>>>>>> develop
+=======
+      <pane id="AndroidView" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="SES Frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="SES Frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+>>>>>>> geofence
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+<<<<<<< HEAD
       <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane" />
+=======
+      <pane id="PackagesPane" />
+>>>>>>> geofence
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -775,17 +963,23 @@
       <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.2789988" />
 =======
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="1" />
+<<<<<<< HEAD
       <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.27181688" />
 >>>>>>> develop
+=======
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.3297568" />
+>>>>>>> geofence
       <window_info id="Structure" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Designer" order="6" />
       <window_info id="Resources Explorer" order="7" />
       <window_info id="Favorites" order="8" side_tool="true" />
+<<<<<<< HEAD
 <<<<<<< HEAD
       <window_info anchor="bottom" id="Run" />
       <window_info anchor="bottom" id="Debug" />
@@ -806,15 +1000,32 @@
       <window_info anchor="bottom" id="Build" order="6" weight="0.32891566" />
       <window_info anchor="bottom" id="Find" order="7" weight="0.32969433" />
 >>>>>>> develop
+=======
+      <window_info active="true" anchor="bottom" id="Logcat" order="0" visible="true" weight="0.32891566" />
+      <window_info anchor="bottom" id="TODO" order="1" />
+      <window_info anchor="bottom" id="Android Profiler" order="2" />
+      <window_info anchor="bottom" id="Terminal" order="3" weight="0.3120482" />
+      <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="5" />
+      <window_info anchor="bottom" id="Build" order="6" weight="0.32891566" />
+      <window_info anchor="bottom" id="Run" order="7" />
+      <window_info anchor="bottom" id="Debug" order="8" />
+      <window_info anchor="bottom" id="Find" order="9" weight="0.32891566" />
+>>>>>>> geofence
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
+<<<<<<< HEAD
+=======
+      <window_info anchor="right" id="Preview" order="5" weight="0.3297568" />
+>>>>>>> geofence
     </layout>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/LocationSearch.java" />
+<<<<<<< HEAD
 <<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/MainPage.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/ExpandedCardPage.java" />
@@ -1008,12 +1219,55 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
+=======
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/ApiSingleton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/Quiz2Activity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_quiz1.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="24" lean-forward="true" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="54" lean-forward="true" selection-start-line="12" selection-start-column="54" selection-end-line="12" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/GeofenceBroadcastReceiver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+>>>>>>> geofence
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/nav_drawer_menu.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -1087,6 +1341,44 @@
         <state relative-caret-position="285">
           <caret line="19" column="13" lean-forward="true" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
 >>>>>>> develop
+=======
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="61" lean-forward="true" selection-start-line="19" selection-start-column="61" selection-end-line="19" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="57" selection-start-line="2" selection-start-column="57" selection-end-line="2" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/Models/Geofence.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/Quiz1Activity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="98" column="47" lean-forward="true" selection-start-line="98" selection-start-column="47" selection-end-line="98" selection-end-column="47" />
+          <folding>
+            <element signature="e#3246#3277#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/dawidjk2/sesfrontend/GeofenceService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="16" column="41" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+>>>>>>> geofence
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

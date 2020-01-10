@@ -65,8 +65,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card, parent, false);
 
-        CardViewHolder viewholder = new CardViewHolder(view, mOnItemListener);
-        return viewholder;
+        CardViewHolder viewHolder = new CardViewHolder(view, mOnItemListener);
+        return viewHolder;
     }
 
     // Replace the contents of a view (invoked by the layout manager)
