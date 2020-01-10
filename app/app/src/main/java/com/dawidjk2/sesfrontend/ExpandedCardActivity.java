@@ -12,6 +12,7 @@ import com.dawidjk2.sesfrontend.Models.Card;
 import com.dawidjk2.sesfrontend.Models.Transaction;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class ExpandedCardActivity extends AppCompatActivity {
 
@@ -41,6 +42,7 @@ public class ExpandedCardActivity extends AppCompatActivity {
         previousActivity = findViewById(R.id.expandedCardPagePreviousActivity);
 
         cardName.setText(card.getCardName());
+
         int cardNumLength = card.getCardNumber().length();
         cardNumber.setText("Ending In - " + card.getCardNumber().substring(cardNumLength - 5, cardNumLength - 1));
         previousActivity.setText("$" + card.getPreviousActivity());

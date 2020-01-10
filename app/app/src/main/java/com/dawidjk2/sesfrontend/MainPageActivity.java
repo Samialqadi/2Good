@@ -23,8 +23,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.dawidjk2.sesfrontend.Adapters.CardAdapter;
 import com.dawidjk2.sesfrontend.Models.Card;
 import com.dawidjk2.sesfrontend.Models.Geofence;
@@ -42,6 +44,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,6 +59,7 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
     private TextView hello;
     private TextView balance;
     private TextView cardStatus;
+    private TextView totalCharity;
 
     private GeofencingClient geofencingClient;
     private PendingIntent geofencePendingIntent;
@@ -71,6 +77,7 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
         geofenceService = new GeofenceService(geofencingClient);
         cardStatus = findViewById(R.id.cardDisabled);
         checkCardStatus();
+        getTotalCharity();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, getString(R.string.backend_url) + "v0/geofence/getPlaces", null, new Response.Listener<JSONObject>() {
@@ -122,13 +129,14 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
 
         // Dummy data
         String name = "Sami";
-        String accountBalance = "100.00";
+        String accountBalance = "0.00";
         hello = findViewById(R.id.mainPageHello);
         balance = findViewById(R.id.mainPageBalance);
         findViewById(R.id.nav_bar_button).setOnClickListener(this);
         hello.setText("Welcome back, " + name + "!");
         balance.setText("$" + accountBalance);
         getCards();
+
         // Handle the recycle view for all cards
         recyclerView = findViewById(R.id.mainPageCards);
         recyclerView.setHasFixedSize(true);
@@ -137,6 +145,39 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
         adapter = new CardAdapter(myDataset, this);
         recyclerView.setAdapter(adapter);
     }
+
+    public void getTotalCharity() {
+        String endpoint = getString(R.string.backend_url) + "v0/charity/totalCharity";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, endpoint, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject object) {
+                        try {
+                            double total = object.getDouble("total");
+                            System.out.println("Total:");
+                            System.out.println(total);
+
+                            totalCharity = findViewById(R.id.mainPageBalance);
+                            NumberFormat numberFormat = NumberFormat.getCurrencyInstance();
+
+                            totalCharity.setText((numberFormat.format(total)));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        /* TODO: Handle error */
+                        Log.e("Volley", error.toString());
+                    }
+                });
+        // Access the RequestQueue through your singleton class.
+        ApiSingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+
+    }
+
     public void getCards() {
         String endpoint = getString(R.string.backend_url) + "v0/charity/getAccounts";
         myDataset = new ArrayList<>();
@@ -180,7 +221,10 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
                                 JSONObject object = array.getJSONObject(i);
                                 String merchantId = object.getString("merchant_id");
                                 String amount = object.getString("amount");
-                                transactions.add(new Transaction(card, merchantId, amount));
+                                String charity = object.getString("charity");
+                                Log.d("Charity", charity);
+
+                                transactions.add(new Transaction(card, merchantId, amount, charity));
                             }
                             // This is where you actually switch activites
                             Intent intent = new Intent(MainPageActivity.this, ExpandedCardActivity.class);
