@@ -35,6 +35,7 @@
             android:screenOrientation="sensorPortrait" />
         <activity android:name=".MainPageActivity" />
         <activity android:name=".ExpandedCardActivity"/>
+        <activity android:name=".UpdatePreferenceActivity"/>
     </application>
 
 </manifest>

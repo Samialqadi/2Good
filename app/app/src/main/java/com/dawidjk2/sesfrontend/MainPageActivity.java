@@ -6,11 +6,13 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.view.View;
 
@@ -40,6 +42,7 @@ import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,7 +54,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainPageActivity extends AppCompatActivity implements CardAdapter.OnItemListener, View.OnClickListener {
+public class MainPageActivity extends AppCompatActivity implements CardAdapter.OnItemListener, View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -66,6 +69,7 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
     private GeofenceService geofenceService;
     private LocationManager locationManager;
     public static String lastKnownLocation = "";
+    private NavigationView navigationView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -133,6 +137,8 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
         hello = findViewById(R.id.mainPageHello);
         balance = findViewById(R.id.mainPageBalance);
         findViewById(R.id.nav_bar_button).setOnClickListener(this);
+        navigationView = findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(this);
         hello.setText("Welcome back, " + name + "!");
         balance.setText("$" + accountBalance);
         getCards();
@@ -340,5 +346,25 @@ public class MainPageActivity extends AppCompatActivity implements CardAdapter.O
     protected void onResume() {
         super.onResume();
         checkCardStatus();
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        int id = menuItem.getItemId();
+        if (id==R.id.nav_preferences) {
+            //System.out.println("WEE INN HEEREE!!!!");
+            Intent intent = new Intent(MainPageActivity.this, UpdatePreferenceActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id==R.id.nav_logout)
+        {
+            SharedPreferences settings = getApplicationContext().getSharedPreferences("appState", Context.MODE_PRIVATE);
+            settings.edit().clear().commit();
+            Intent intent = new Intent(MainPageActivity.this, loginScreen.class);
+            startActivity(intent);
+            return true;
+        }
+        return false;
     }
 }

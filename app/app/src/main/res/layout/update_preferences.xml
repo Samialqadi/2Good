@@ -4,41 +4,131 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UpdatePreferenceActivity">
-
-
+    tools:context=".Quiz1Activity">
     <TextView
-        android:id="@+id/prefsTitle"
+        android:id="@+id/instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:gravity="center"
-        android:text="You can update your preferences here."
-        android:textSize="20sp"
+        android:text="Update your preferences here."
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@id/help"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/preferences"
-        android:layout_width="389dp"
-        android:layout_height="469dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prefsTitle"
-        tools:listitem="@layout/preference" />
-
-    <Button
-        android:id="@+id/preferencesSubmit"
+    <TextView
+        android:id="@+id/help"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Submit"
+        android:text="We're here to help."
+        app:layout_constraintBottom_toTopOf="@id/habitList"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/preferences" />
-
+        app:layout_constraintTop_toBottomOf="@+id/instructions" />
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:text="Save Changes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/habitList" />
+    <LinearLayout
+        android:id="@+id/habitList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="6dp"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/submitButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/help">
+        <CheckBox
+            android:id="@+id/habit1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:paddingLeft="8dp"
+            android:text="Alcohol" />
+        <CheckBox
+            android:id="@+id/habit2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:paddingLeft="8dp"
+            android:text="Coffee Shops" />
+        <CheckBox
+            android:id="@+id/habit3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:paddingLeft="8dp"
+            android:text="Gambling" />
+        <CheckBox
+            android:id="@+id/habit4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:paddingLeft="8dp"
+            android:text="Restaurants" />
+        <CheckBox
+            android:id="@+id/habit5"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:paddingLeft="8dp"
+            android:text="Clothes" />
+        <CheckBox
+            android:id="@+id/habit8"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:paddingLeft="8dp"
+            android:text="Mount Desert Island Biological Laboratory" />
+        <CheckBox
+            android:id="@+id/habit9"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:paddingLeft="8dp"
+            android:text="United Way of Eastern Maine" />
+        <CheckBox
+            android:id="@+id/habit10"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:paddingLeft="8dp"
+            android:text="The Jackson Laboratory" />
+        <CheckBox
+            android:id="@+id/habit11"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:paddingLeft="8dp"
+            android:text="Maine Historical Society" />
+        <CheckBox
+            android:id="@+id/habit12"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:paddingLeft="8dp"
+            android:text="Boys and Girls Clubs of Southern Maine" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
