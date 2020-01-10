@@ -9,11 +9,13 @@ public class Transaction implements Serializable {
     private Card card;
     private String vendor;
     private String amount;
+    private String charity;
 
-    public Transaction(Card of, String vendor, String amount) {
+    public Transaction(Card of, String vendor, String amount, String charity) {
         this.card = of;
         this.vendor = vendor;
         this.amount = amount;
+        this.charity = charity;
     }
 
     public Card getCard() {
@@ -39,4 +41,8 @@ public class Transaction implements Serializable {
     public void setAmount(String amount) {
         this.amount = amount;
     }
+
+    public String getCharity() { return charity; }
+
+    public void setCharity(String charity) { this.charity = charity; }
 }

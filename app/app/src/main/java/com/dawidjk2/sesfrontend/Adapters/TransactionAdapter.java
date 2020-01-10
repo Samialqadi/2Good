@@ -11,6 +11,7 @@ import com.dawidjk2.sesfrontend.R;
 import com.dawidjk2.sesfrontend.Models.Transaction;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.TransactionViewHolder> {
 
@@ -20,16 +21,27 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         public TextView vendor;
         public TextView amount;
+        public TextView charity;
 
         public TransactionViewHolder(View itemView) {
             super(itemView);
             vendor = itemView.findViewById(R.id.transactionVendor);
             amount = itemView.findViewById(R.id.transactionAmount);
+            charity = itemView.findViewById(R.id.transactionAmountCharity);
         }
 
         public void setDetails(Transaction transaction) {
-            vendor.setText(transaction.getVendor());
+            Random rand = new Random();
+            int randomNum = rand.nextInt((5));
+            String[] names = {"Starbucks", "Chipotle", "Macy's", "Home Depot", "Speedway"};
+            vendor.setText(names[randomNum]);
+
             amount.setText("$" + transaction.getAmount());
+            int length = transaction.getCharity().length();
+            if (length > 4) {
+                length = 4;
+            }
+            charity.setText("$" + transaction.getCharity().substring(0,length));
         }
     }
 
